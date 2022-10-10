@@ -1,0 +1,8 @@
+# ninja log v5
+0	30	1665421512739598983	CMakeFiles/binding_of_briatte.dir/main.c.o	334ea26b10c1a310
+0	49	1665421405351776248	CMakeFiles/binding_of_briatte.dir/sources/file_mapping/file_mapping.c.o	2a4262c07ed13d6e
+30	63	1665421512772947215	binding_of_briatte	88d2e3ebc06ac58f
+0	25	1665421851958056815	CMakeFiles/binding_of_briatte.dir/main.c.o	a550df07170adcba
+0	25	1665421851958974014	CMakeFiles/binding_of_briatte.dir/sources/file_mapping/file_mapping.c.o	b3e079a85f2d33ac
+0	92	1665421852025628646	CMakeFiles/binding_of_briatte.dir/sdlTest/sedlTest.c.o	b24e3136c9bed40
+92	126	1665421852060533737	binding_of_briatte	a552d560b648acc2
