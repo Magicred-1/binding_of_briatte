@@ -15,7 +15,7 @@ message("LIBRARIES = ${LIBRARIES}")
 add_executable(binding_of_briatte
         sources/file_mapping/file_mapping.c
         sources/file_mapping/file_mapping.h
-        main.c sdlTest/sedlTest.c sdlTest/sedlTest.h)
+        main.c sdlTest/sedlTest.c sdlTest/sedlTest.h sources/itemCrud/itemCrud.c sources/itemCrud/itemCrud.h sources/more-string/more-string.c sources/more-string/more-string.h)
 
 
 TARGET_LINK_LIBRARIES(binding_of_briatte  ${LIBRARIES})

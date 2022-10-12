@@ -2,10 +2,14 @@
 #include <stdlib.h>
 #include "./sources/file_mapping/file_mapping.h"
 #include "sdlTest/sedlTest.h"
+#include "./sources/itemCrud/itemCrud.h"
 int main(int argc, char const *argv[])
 {
     //fileMapping("./ressources/maps/config.rtbob");
-    sdlTest();
-    printf("hello world");
+    //sdlTest();
+    Item* item = newItem("Doran_Shield",2,2,0,1,0,0);
+    printItem(*item);
+    freeItem(item);
+    Items("items.itbob");
     return 0;
 }

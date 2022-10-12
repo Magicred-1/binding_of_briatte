@@ -93,6 +93,20 @@ build CMakeFiles/binding_of_briatte.dir/sdlTest/sedlTest.c.o: C_COMPILER__bindin
   OBJECT_DIR = CMakeFiles/binding_of_briatte.dir
   OBJECT_FILE_DIR = CMakeFiles/binding_of_briatte.dir/sdlTest
 
+build CMakeFiles/binding_of_briatte.dir/sources/itemCrud/itemCrud.c.o: C_COMPILER__binding_of_briatte_Debug /Users/eliottgermain/Desktop/binding_of_briatte/sources/itemCrud/itemCrud.c || cmake_object_order_depends_target_binding_of_briatte
+  DEP_FILE = CMakeFiles/binding_of_briatte.dir/sources/itemCrud/itemCrud.c.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -std=gnu11
+  INCLUDES = -I/Users/eliottgermain/Desktop/binding_of_briatte/sources/file_mapping -I/opt/homebrew/Cellar/sdl2/2.24.1/include
+  OBJECT_DIR = CMakeFiles/binding_of_briatte.dir
+  OBJECT_FILE_DIR = CMakeFiles/binding_of_briatte.dir/sources/itemCrud
+
+build CMakeFiles/binding_of_briatte.dir/sources/more-string/more-string.c.o: C_COMPILER__binding_of_briatte_Debug /Users/eliottgermain/Desktop/binding_of_briatte/sources/more-string/more-string.c || cmake_object_order_depends_target_binding_of_briatte
+  DEP_FILE = CMakeFiles/binding_of_briatte.dir/sources/more-string/more-string.c.o.d
+  FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk -std=gnu11
+  INCLUDES = -I/Users/eliottgermain/Desktop/binding_of_briatte/sources/file_mapping -I/opt/homebrew/Cellar/sdl2/2.24.1/include
+  OBJECT_DIR = CMakeFiles/binding_of_briatte.dir
+  OBJECT_FILE_DIR = CMakeFiles/binding_of_briatte.dir/sources/more-string
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target binding_of_briatte
@@ -101,7 +115,7 @@ build CMakeFiles/binding_of_briatte.dir/sdlTest/sedlTest.c.o: C_COMPILER__bindin
 #############################################
 # Link the executable binding_of_briatte
 
-build binding_of_briatte: C_EXECUTABLE_LINKER__binding_of_briatte_Debug CMakeFiles/binding_of_briatte.dir/sources/file_mapping/file_mapping.c.o CMakeFiles/binding_of_briatte.dir/main.c.o CMakeFiles/binding_of_briatte.dir/sdlTest/sedlTest.c.o | /opt/homebrew/Cellar/sdl2/2.24.1/lib/libSDL2-2.0.0.dylib /opt/homebrew/Cellar/sdl2/2.24.1/lib/libSDL2.dylib
+build binding_of_briatte: C_EXECUTABLE_LINKER__binding_of_briatte_Debug CMakeFiles/binding_of_briatte.dir/sources/file_mapping/file_mapping.c.o CMakeFiles/binding_of_briatte.dir/main.c.o CMakeFiles/binding_of_briatte.dir/sdlTest/sedlTest.c.o CMakeFiles/binding_of_briatte.dir/sources/itemCrud/itemCrud.c.o CMakeFiles/binding_of_briatte.dir/sources/more-string/more-string.c.o | /opt/homebrew/Cellar/sdl2/2.24.1/lib/libSDL2-2.0.0.dylib /opt/homebrew/Cellar/sdl2/2.24.1/lib/libSDL2.dylib
   FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX12.3.sdk
   LINK_LIBRARIES = -Wl,-rpath,/opt/homebrew/Cellar/sdl2/2.24.1/lib  /opt/homebrew/Cellar/sdl2/2.24.1/lib/libSDL2-2.0.0.dylib  /opt/homebrew/Cellar/sdl2/2.24.1/lib/libSDL2.dylib
   LINK_PATH = -L/opt/homebrew/Cellar/sdl2/2.24.1/lib
