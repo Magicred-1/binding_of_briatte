@@ -41,16 +41,42 @@ void freeItem(Item *item){
     free(item);
 }
 
+void printAllItems(Item **Items, int size){
+    for (int i = 0; i < size; i++){
+        printf("%s  \n", Items[i]->name);
+    }
+}
 
-void Items(char *fileName){
+int getSize(char *fileName){
+    int size;
     FILE *f = fopen(fileName, "r");
-    if (f==NULL)
-        printf("Error when trying to open %s", fileName);
-    else{
+    fscanf(f,"{%d}", &size);
+    fclose(f);
+    return size;
+}
+
+
+void getItems(Item **Items, char *fileName){
+    FILE *f = fopen(fileName, "r");
+
         int size;
+        int i = 0;
         fscanf(f,"{%d}", &size);
         printf("%d",size);
-    }
+        char data[40];
+        char key[40];
+            while(fscanf(f,"%s=%s", key,data ) != EOF){
+                    if(strcmp(key , "name")== 0){
+                        strcpy(Items[i]->name, data);
+                        i++;
+                    }
+            }
+
     fclose(f);
 }
 
+void freeAllItems(Item **Items, int size) {
+    for (int i = 0; i < size; i++) {
+        freeItem(Items[i]);
+    }
+}

@@ -45,7 +45,12 @@ void freeItem(Item*);
  * @param filename
  * @return
  */
-void Items(char *filename);
+void getItems(Item **Items, char *filename);
 
+int getSize(char * fileName);
+
+void printAllItems(Item **Items, int size);
+
+void freeAllItems(Item **Items, int size);
 
 #endif //BINDING_OF_BRIATTE_ITEMCRUD_H
