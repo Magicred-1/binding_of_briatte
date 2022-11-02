@@ -10,6 +10,12 @@ INCLUDE_DIRECTORIES(  /opt/homebrew/Cellar/sdl2/2.24.1/include)
 LINK_DIRECTORIES(  /opt/homebrew/Cellar/sdl2/2.24.1/lib)
 
 file(GLOB LIBRARIES "/opt/homebrew/Cellar/sdl2/2.24.1/lib/*.dylib")
+
+#link raylib
+INCLUDE_DIRECTORIES(  /opt/homebrew/Cellar/raylib/4.2.0/include)
+LINK_DIRECTORIES(  /opt/homebrew/Cellar/raylib/4.2.0/lib)
+LINK_LIBRARIES(raylib)
+
 message("LIBRARIES = ${LIBRARIES}")
 
 add_executable(binding_of_briatte

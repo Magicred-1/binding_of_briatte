@@ -28,7 +28,7 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 15,
+				"line" : 21,
 				"parent" : 0
 			},
 			{
@@ -38,9 +38,15 @@
 				"parent" : 0
 			},
 			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 16,
+				"parent" : 0
+			},
+			{
 				"command" : 2,
 				"file" : 0,
-				"line" : 21,
+				"line" : 27,
 				"parent" : 0
 			},
 			{
@@ -53,6 +59,12 @@
 				"command" : 4,
 				"file" : 0,
 				"line" : 9,
+				"parent" : 0
+			},
+			{
+				"command" : 4,
+				"file" : 0,
+				"line" : 15,
 				"parent" : 0
 			}
 		]
@@ -72,12 +84,16 @@
 			"includes" : 
 			[
 				{
-					"backtrace" : 4,
+					"backtrace" : 5,
 					"path" : "/Users/eliottgermain/Desktop/binding_of_briatte/sources/file_mapping"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 6,
 					"path" : "/opt/homebrew/Cellar/sdl2/2.24.1/include"
+				},
+				{
+					"backtrace" : 7,
+					"path" : "/opt/homebrew/Cellar/raylib/4.2.0/include"
 				}
 			],
 			"language" : "C",
@@ -118,16 +134,26 @@
 				"role" : "libraryPath"
 			},
 			{
-				"fragment" : "-Wl,-rpath,/opt/homebrew/Cellar/sdl2/2.24.1/lib",
+				"backtrace" : 3,
+				"fragment" : "-L/opt/homebrew/Cellar/raylib/4.2.0/lib",
+				"role" : "libraryPath"
+			},
+			{
+				"fragment" : "-Wl,-rpath,/opt/homebrew/Cellar/sdl2/2.24.1/lib -Wl,-rpath,/opt/homebrew/Cellar/raylib/4.2.0/lib",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 3,
+				"backtrace" : 1,
+				"fragment" : "-lraylib",
+				"role" : "libraries"
+			},
+			{
+				"backtrace" : 4,
 				"fragment" : "/opt/homebrew/Cellar/sdl2/2.24.1/lib/libSDL2-2.0.0.dylib",
 				"role" : "libraries"
 			},
 			{
-				"backtrace" : 3,
+				"backtrace" : 4,
 				"fragment" : "/opt/homebrew/Cellar/sdl2/2.24.1/lib/libSDL2.dylib",
 				"role" : "libraries"
 			}

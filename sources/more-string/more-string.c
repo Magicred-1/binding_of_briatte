@@ -13,4 +13,5 @@ char* duplicateString(char* str){
     int size = strlen(str);
     char *newStr = malloc(sizeof(char)*(size+ 1));
     return strcpy(newStr, str);
+    
 }
