@@ -2,50 +2,103 @@
 #include <stdlib.h>
 #include "file_mapping.h"
 
-void printMap(char *map[9][15])
+Room* newRoom(char** map, int x, int y, int nbLevel)
 {
-    for (int i = 0; i < 9; i++)
-    {
-        for (int j = 0; j < 15; j++)
-        {
-            printf("%s", map[i][j]);
-        }
-        printf("\n");
-    }
+    Room* room = malloc(sizeof(Room));
+    room->map = map;
+    room->x = x;
+    room->y = y;
+    room->nbLevel = nbLevel;
+    return room;
 }
 
-char fileMapping(char *file_source) {
-    char *map[9][15];
+Room** createMap(char* file_source, int* ptrNbLevel)
+{
+    FILE* file = fopen(file_source, "r");
 
-    // TODO : I need to try with a pointer like this instead char *line = NULL;
-    
-    // we check if we can open the file
-    FILE *file = fopen(file_source, "r");
+    int x, y, nbLevel;
 
+    Room** rooms = malloc(sizeof(Room*) * nbLevel);
 
-    if (file == NULL) 
+    *ptrNbLevel = nbLevel;
+
+    if(file != NULL)
     {
-        printf("Error opening file. Please check if the file exist and if you have the right to read it. \nName of file : %s", file_source);
-        exit(1);
-    }
-    else 
-    {
-    /* if successful, we read the file and scanf the content
-    ** into a the map array
-    */
-    while (!feof(file))
-    {
-        for(int column = 0; column < 9; column += 1)
+        fscanf(file, "%d %d %d", &x, &y, &nbLevel);
+
+        for(int i = 0; i < nbLevel; i += 1) 
         {
-            for(int row = 0; row < 15; row += 1)
+            char** map = malloc(sizeof(char*) * y * x);
+            for(int j = 0; j < y; j += 1) 
             {
-                fscanf(file, "%s", map[column][row]);
-                printf("%s", map[column][row]);
+                for(int k = 0; k < x; k += 1) 
+                {
+                // if the content of the file is not a number, 
+                // it will be a letter between 'A' and 'Z'
+                    if(fscanf(file, "%c", &map[j][k]) == 0)
+                    {
+                        k -= 1;
+                    }
+                    else 
+                    {
+                        map[j][k] = fgetc(file);
+                    }
+                }
+                rooms[i] = newRoom(map, x, y, i);
             }
         }
     }
+    else 
+    {
+        printf("Error: File not found.\n");
+        exit(1);
+    }
     fclose(file);
-    free(file);
-    printMap(map);
+    return rooms;
+}
+
+
+
+void freeMap(Room** rooms, int nbLevel)
+{
+    for (int i = 0; i < nbLevel; i += 1)
+    {
+        freeRoom(rooms[i]);
+    }
+    free(rooms);
+}
+
+void printMap(Room** rooms, int nbLevel)
+{
+    for (int i = 0; i < nbLevel; i += 1)
+    {
+        printRoom(rooms[i]);
+    }
+}
+
+// We can use this fucntion to free the memory and avoid memory leaks
+void freeRoom(Room* room)
+{
+    for(int i = 0; i < room->x; i += 1)
+    {
+        for(int j = 0; j < room->y; j += 1)
+        {
+            free(room->map[i]);
+        }
+    }
+    free(room->map);
+    free(room);
+}
+
+void printRoom(Room* room)
+{
+    printf("nbLevel = %d", room->nbLevel);  
+
+    for (int i = 0; i < room->y; i += 1)
+    {
+        for (int j = 0; j < room->x; j += 1)
+        {
+            printf("%c", room->map[i][j]);
+        }
     }
 }

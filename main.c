@@ -4,6 +4,18 @@
 
 int main(int argc, char const *argv[])
 {
-    fileMapping("./ressources/maps/config.rtbob");
+    int* ptrNbLevel = malloc(sizeof(int));
+    Room** rooms = createMap("./ressources/maps/config.rtbob", ptrNbLevel);
+    int i = 0;
+    for (i = 0; i < *ptrNbLevel; i++)
+    {
+        printRoom(rooms[i]);
+    }
+    free(ptrNbLevel);
+    for (i = 0; i < *ptrNbLevel; i++)
+    {
+        freeRoom(rooms[i]);
+    }
+    free(rooms);
     return 0;
 }
