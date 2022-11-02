@@ -9,17 +9,23 @@
 
 #ifndef FILE_MAPPING_H
 #define FILE_MAPPING_H
-/*
-** @param file_source : the path of the file (maps) to be read
-** @return a two dimension array containing the map
-*/
-char fileMapping(char *file_source);
 
+struct Room
+{
+    char** map;
+    int x;
+    int y;
+    int nbLevel;
+};
 
-/*
-** @param map : the map to be printed
-** @return void
-*/
-void printMap(char *map[9][15]);
+typedef struct Room Room;
+
+Room** createMap(char* file_source, int* ptrNbLevel);
+
+Room* newRoom(char** map, int x, int y, int nbLevel);
+
+void freeRoom(Room* room);
+
+void printRoom(Room* room);
 
 #endif //FILE_MAPPING_H
