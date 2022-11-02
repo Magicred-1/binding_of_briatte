@@ -1,5 +1,6 @@
 #include <stdio.h> 
 #include <stdlib.h>
+#include <string.h>
 #include "file_mapping.h"
 
 Room* newRoom(char** map, int x, int y, int nbLevel)
@@ -12,71 +13,67 @@ Room* newRoom(char** map, int x, int y, int nbLevel)
     return room;
 }
 
-Room** createMap(char* file_source, int* ptrNbLevel)
+void checkFileExtension(char* file_source)
 {
-    FILE* file = fopen(file_source, "r");
-
-    int x, y, nbLevel;
-
-    Room** rooms = malloc(sizeof(Room*) * nbLevel);
-
-    *ptrNbLevel = nbLevel;
-
-    if(file != NULL)
+    char* extension = strrchr(file_source, '.');
+    if (strcmp(extension, ".rtbob") != 0)
     {
-        fscanf(file, "%d %d %d", &x, &y, &nbLevel);
-
-        for(int i = 0; i < nbLevel; i += 1) 
-        {
-            char** map = malloc(sizeof(char*) * y * x);
-            for(int j = 0; j < y; j += 1) 
-            {
-                for(int k = 0; k < x; k += 1) 
-                {
-                // if the content of the file is not a number, 
-                // it will be a letter between 'A' and 'Z'
-                    if(fscanf(file, "%c", &map[j][k]) == 0)
-                    {
-                        k -= 1;
-                    }
-                    else 
-                    {
-                        map[j][k] = fgetc(file);
-                    }
-                }
-                rooms[i] = newRoom(map, x, y, i);
-            }
-        }
-    }
-    else 
-    {
-        printf("Error: File not found.\n");
+        printf("The file extension is not correct. Please use .rtbob\n");
         exit(1);
     }
-    fclose(file);
-    return rooms;
 }
 
-
-
-void freeMap(Room** rooms, int nbLevel)
+Room** createMap(char* file_source)
 {
-    for (int i = 0; i < nbLevel; i += 1)
+    FILE *f = fopen(file_source, "r");
+    // check if the file exists and the file extension is .rtbob
+    if (f == NULL)
     {
-        freeRoom(rooms[i]);
+        printf("The file does not exist.\n");
+        return NULL;
     }
-    free(rooms);
+    else
+    {
+        checkFileExtension(file_source);
+
+        char c;
+
+        int nbMaps = 0;
+        int idMaps = 0;
+        int size_x = 0;
+        int size_y = 0;
+
+        fscanf(f, "{%d}\n[%d|%d]%d", &nbMaps, &size_y, &size_x, &idMaps);
+
+        printf("%d %d %d %d \n", nbMaps, size_y, size_x, idMaps);
+
+            for (int i = 0; i < nbMaps; i += 1)
+            {
+                char** map = malloc((size_x * 2 - 1) * sizeof(char*));
+
+                for (int j = 0; j < size_x; j += 1)
+                {
+                    map[j] = malloc((size_y * 2 - 1) * sizeof(char));
+                }
+
+                for (int j = 0; j < size_x; j += 1)
+                {
+                    
+                    for (int k = 0; k < size_y; k += 1)
+                    {
+                        fscanf(f, "%c", &c);
+                        map[j][k] = c;
+                    }
+                }
+
+                Room* room = newRoom(map, size_x, size_y, i);
+                printRoom(room);
+            }
+        fclose(f);
+    }
 }
 
-void printMap(Room** rooms, int nbLevel)
-{
-    for (int i = 0; i < nbLevel; i += 1)
-    {
-        printRoom(rooms[i]);
-    }
-}
-
-// We can use this fucntion to free the memory and avoid memory leaks
+// We can use this function to free the memory and avoid memory leaks
 void freeRoom(Room* room)
 {
     for(int i = 0; i < room->x; i += 1)
@@ -92,11 +89,11 @@ void freeRoom(Room* room)
 
 void printRoom(Room* room)
 {
-    printf("nbLevel = %d", room->nbLevel);  
+    // printf("nbLevel = %d", room->nbLevel);  
 
-    for (int i = 0; i < room->y; i += 1)
+    for (int i = 0; i < room->x; i += 1)
     {
-        for (int j = 0; j < room->x; j += 1)
+        for (int j = 0; j < room->y; j += 1)
         {
             printf("%c", room->map[i][j]);
         }

@@ -20,12 +20,16 @@ struct Room
 
 typedef struct Room Room;
 
-Room** createMap(char* file_source, int* ptrNbLevel);
-
 Room* newRoom(char** map, int x, int y, int nbLevel);
+
+Room** createMap(char* file_source);
+
+void checkFileExtension(char* file_source);
 
 void freeRoom(Room* room);
 
 void printRoom(Room* room);
+
+void printArrayMaps(Room** arrayMaps, int nbMaps);
 
 #endif //FILE_MAPPING_H
