@@ -48,7 +48,7 @@ Room** createMap(char* file_source)
 
         ///printf("%d %d %d %d \n", nbMaps, size_y, size_x, idMaps);
 
-            for (int i = 0; i <= nbMaps+1; i += 1)
+            for (int i = 0; i <= nbMaps*2-1; i += 1)
             {
                 if(i %2 == 0){
                     fscanf(f,"\n[%d|%d]%d",&size_y, &size_x, &idMaps);
