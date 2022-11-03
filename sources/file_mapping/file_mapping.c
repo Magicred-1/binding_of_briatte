@@ -43,12 +43,18 @@ Room** createMap(char* file_source)
         int size_x = 0;
         int size_y = 0;
 
-        fscanf(f, "{%d}\n[%d|%d]%d", &nbMaps, &size_y, &size_x, &idMaps);
+        fscanf(f, "{%d}\n", &nbMaps);
+        printf("nbMaps : %d\n", nbMaps);
 
-        printf("%d %d %d %d \n", nbMaps, size_y, size_x, idMaps);
+        ///printf("%d %d %d %d \n", nbMaps, size_y, size_x, idMaps);
 
-            for (int i = 0; i < nbMaps; i += 1)
+            for (int i = 0; i <= nbMaps+1; i += 1)
             {
+                if(i %2 == 0){
+                    fscanf(f,"\n[%d|%d]%d",&size_y, &size_x, &idMaps);
+                    printf("\n[%d|%d]%d",size_y, size_x, idMaps);
+                }
+
                 char** map = malloc((size_x * 2 - 1) * sizeof(char*));
 
                 for (int j = 0; j < size_x; j += 1)
@@ -68,7 +74,10 @@ Room** createMap(char* file_source)
 
                 Room* room = newRoom(map, size_x, size_y, i);
                 printRoom(room);
+                //printf("i = %d\n",i);
+
             }
+
         fclose(f);
     }
 }

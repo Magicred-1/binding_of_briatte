@@ -5,7 +5,7 @@
 
 int main(int argc, char const *argv[])
 {
-    createMap("./ressources/maps/config.rtbob");
+    createMap("config.rtbob");
 
     // freeRoom(test);
     
