@@ -44,9 +44,51 @@ int getLastId()
     }
     else
     {
-        printf("The map file is empty.\n\n");
-        // createMap();
-        exit(0);
+        checkFileExtension(file);
+
+        char c;
+
+        int nbMaps = 0;
+        int idMaps = 0;
+        int size_x = 0;
+        int size_y = 0;
+
+        fscanf(file, "{%d}\n", &nbMaps);
+        printf("nbMaps : %d\n", nbMaps);
+
+        ///printf("%d %d %d %d \n", nbMaps, size_y, size_x, idMaps);
+
+            for (int i = 0; i <= nbMaps*2-1; i += 1)
+            {
+                if(i % 2 == 0){
+                    fscanf(file,"\n[%d|%d]%d",&size_y, &size_x, &idMaps);
+                    printf("\n[%d|%d]%d",size_y, size_x, idMaps);
+                }
+
+                char** map = malloc((size_x * 2 - 1) * sizeof(char*));
+
+                for (int j = 0; j < size_x; j += 1)
+                {
+                    map[j] = malloc((size_y * 2 - 1) * sizeof(char));
+                }
+
+                for (int j = 0; j < size_x; j += 1)
+                {
+                    
+                    for (int k = 0; k < size_y; k += 1)
+                    {
+                        fscanf(file, "%c", &c);
+                        map[j][k] = c;
+                    }
+                }
+
+                Room* room = newRoom(map, size_x, size_y, i);
+                printRoom(room);
+                //printf("i = %d\n",i);
+
+            }
+
+        fclose(file);
     }
 }
 
