@@ -50,7 +50,7 @@ Room** createMap(char* file_source)
 
             for (int i = 0; i <= nbMaps*2-1; i += 1)
             {
-                if(i %2 == 0){
+                if(i % 2 == 0){
                     fscanf(f,"\n[%d|%d]%d",&size_y, &size_x, &idMaps);
                     printf("\n[%d|%d]%d",size_y, size_x, idMaps);
                 }
