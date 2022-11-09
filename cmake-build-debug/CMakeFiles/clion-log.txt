@@ -1,5 +1,1 @@
-/Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake -DCMAKE_BUILD_TYPE=Debug -DCMAKE_MAKE_PROGRAM=/Applications/CLion.app/Contents/bin/ninja/mac/ninja -G Ninja /Users/eliottgermain/Desktop/binding_of_briatte
-LIBRARIES = /opt/homebrew/Cellar/sdl2/2.24.1/lib/libSDL2-2.0.0.dylib;/opt/homebrew/Cellar/sdl2/2.24.1/lib/libSDL2.dylib
--- Configuring done
--- Generating done
--- Build files have been written to: /Users/eliottgermain/Desktop/binding_of_briatte/cmake-build-debug
+CMake executable not found: /Applications/CLion.app/Contents/bin/cmake/mac/bin/cmake Configure Disable profile

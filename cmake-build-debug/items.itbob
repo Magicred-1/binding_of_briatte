@@ -1,10 +1,10 @@
 {20}
 ---
 name=<3
-hpMax=1
+hpMax=2
 ---
 name=Snack
-hpMax=1
+hpMax=9
 ---
 name=Launch
 hpMax=1
@@ -49,7 +49,7 @@ hpMax=1
 flight=true
 ---
 name=MagicMushroom
-HpMax=1
+hpMax=1
 shield=1
 dmg=1
 ---
@@ -69,3 +69,4 @@ hpMax=2
 name=SpiritOfTheNight
 ss=true
 flight=true
+---

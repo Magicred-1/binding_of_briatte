@@ -12,10 +12,17 @@ int main(int argc, char const *argv[])
     //freeItem(item);
     int size;
     Item **Items = getItems("items.itbob",&size);
+
     printAllItems(Items, size);
     freeAllItems(Items, size);
     //Item *item = creatItem();
-   // printItem(*item);
+    // printItem(*item);
+    //Item *itemArr [getSize("items.itbob")];
+    ////printItem(*itemArr[1]);
+    //freeAllItems(itemArr, getSize("items.itbob"));
+
+    //printItem(*itemArr[1]);
+
 
     return 0;
 }
