@@ -105,7 +105,7 @@ Item** getItems( char *fileName, int *itemsSize) {
             if(string[0] == 'n') {
 
                 fseek(f, -strlen(string), SEEK_CUR);
-                fscanf(f, "name=%s", name);
+                fscanf(f, "name=%[^\n]s", name);
                 //printf("name = %s\n" , name);
                 fseek(f, 1, SEEK_CUR);
             }
@@ -176,105 +176,6 @@ Item** getItems( char *fileName, int *itemsSize) {
     }
 }
 
-
-Item **getItemz(char *fileName, int *itemsSize) {
-
-    FILE *f = fopen(fileName, "r");
-    if (f != NULL) {
-        fscanf(f, "{%d}", itemsSize);
-        Item **array = malloc(sizeof(Item)**itemsSize);
-        fseek(f,2, SEEK_CUR);
-        char *c = NULL;
-        int cpt = 0 , cpt1 = 0;
-        while (fgets(c, 255, f) != EOF){
-
-            char name[30];
-            double hpMax = 0;
-            int ss = 0;
-            int ps = 0;
-            char flight = 0;
-            double dmg = 0;
-            double shield = 0;
-
-            if(c[0] == 'n'){
-                fseek(f,-strlen(c),SEEK_CUR);
-                fscanf(f, "name=%s[^\n]", name);
-                printf("name=%s", name);
-                fseek(f,1,SEEK_CUR);
-
-            }
-            else if (c[0] == 's' && fgetc(f) == 'h'){
-                fseek(f,-strlen(c),SEEK_CUR);
-                fscanf(f, "shield=%lf", &shield);
-                printf("shield = %lf\n", shield);
-                fseek(f,1,SEEK_CUR);
-
-            }
-            else if(c[0] == 'h' && c[1] =='p'){
-                fseek(f,-strlen(c),SEEK_CUR);
-                fscanf(f, "hpMax=%lf", &hpMax);
-                printf("hp max = %lf\n", hpMax);
-                fseek(f,1,SEEK_CUR);
-
-            }
-            else if(c[0] == 'd'){
-                fseek(f,-strlen(c),SEEK_CUR);
-                fscanf(f, "dmg=%lf", &dmg);
-                printf("dmg = %lf\n", hpMax);
-                fseek(f,1,SEEK_CUR);
-
-            }
-            else if(c[0] == 'p'){
-                fseek(f,-strlen(c),SEEK_CUR);                char value[20];
-                fscanf(f, "ps=%s", value);
-                if (strcmp(value, "true")==0)
-                    ps = 1;
-                else
-                    ps = 0;
-                printf("ps = %d\n", ps);
-                fseek(f,1,SEEK_CUR);
-
-
-            }
-            else if (c[0] == 'f'){
-                fseek(f,-strlen(c),SEEK_CUR);                char value[20];
-                fscanf(f, "flight=%s", value);
-                if (strcmp(value, "true")==0)
-                    flight = 1;
-                else
-                    flight = 0;
-                printf("flight = %d \n", flight);
-                fseek(f,1,SEEK_CUR);
-
-
-            }
-            else if (c[0] == 's' && c[1] == 's'){
-                fseek(f,-strlen(c),SEEK_CUR);
-                char value[20];
-                fscanf(f, "ss=%s", value);
-                if (strcmp(value, "true")==0)
-                    ss = 1;
-                else
-                    ss = 0;
-                //printf("hp max = %lf", hpMax);
-                fseek(f,1,SEEK_CUR);
-            }
-
-            else if(c[0] == '-'){
-                cpt+=1;
-                fseek(f,4,SEEK_CUR);
-                array[cpt1] = newItem(name, hpMax, shield, dmg, ps, ss, flight);
-            }
-
-
-        }
-        fclose(f);
-        return array;
-    } else {
-        printf("Erreur lors de l'ouverture du fichier");
-        return NULL;
-    }
-}
 
 Item *creatItem(){
     char name[30] ="";

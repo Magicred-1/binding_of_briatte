@@ -9,46 +9,46 @@ hpMax=9
 name=Launch
 hpMax=1
 ---
-name=BlackLotus
+name=Black Lotus
 hpMax=1
 shield=1
 ---
-name=BucketOfLard
+name=Bucket Of Lard
 hpMax=2
 dmg=-0.1
 ---
-name=ChampionBelt
+name=Champion Belt
 dmg=2
 ---
-name=BloodOfTheMartyr
+name=Blood Of TheMartyr
 dmg=1
 ---
-name=CatONineTails
+name=Cat O Nine Tails
 dmg=1
 ---
-name=CeremonialRobes
+name=Ceremonial Robes
 shield=3
 dmg=1
 ---
-name=Cupid'sArrow
+name=Cupid's Arrow
 ps=true
 ---
-name=DeadDove
+name=Dead Dove
 ss=true
 flight=true
 ---
-name=DeadOnion
+name=Dead Onion
 ps=true
 ss=true
 ---
-name=GrowthHormones
+name=Growth Hormones
 dmg=1
 ---
-name=HolyGrail
+name=Holy Grail
 hpMax=1
 flight=true
 ---
-name=MagicMushroom
+name=Magic Mushroom
 hpMax=1
 shield=1
 dmg=1
@@ -57,16 +57,16 @@ name=Meat!
 hpMax=1
 dmg=1
 ---
-name=OuijaBoard
+name=Ouija Board
 ss=true
 ---
 name=Pentagram
 dmg=2
 ---
-name=RawLiver
+name=Raw Liver
 hpMax=2
 ---
-name=SpiritOfTheNight
+name=Spirit Of TheNight
 ss=true
 flight=true
 ---

@@ -37,3 +37,8 @@
 24	57	1667924066769296396	binding_of_briatte	30a00deb6557df8a
 0	24	1667924078301212721	CMakeFiles/binding_of_briatte.dir/main.c.o	8c19187d8909ca5e
 24	55	1667924078332802250	binding_of_briatte	30a00deb6557df8a
+0	26	1667986495826826400	CMakeFiles/binding_of_briatte.dir/main.c.o	8c19187d8909ca5e
+1	29	1667986495830091609	CMakeFiles/binding_of_briatte.dir/sources/itemCrud/itemCrud.c.o	98d4fbc65c32c9d3
+29	62	1667986495863168367	binding_of_briatte	30a00deb6557df8a
+1	142	1667987727464411890	CMakeFiles/binding_of_briatte.dir/sources/itemCrud/itemCrud.c.o	98d4fbc65c32c9d3
+142	183	1667987727506992090	binding_of_briatte	30a00deb6557df8a
