@@ -185,7 +185,7 @@ void creatItem(){
     char flight[30];
 
     printf("Enter the name of the item you want to creat : \n");
-    scanf("%s",name);
+    scanf("%[^\n]s",name);
     printf("hello");
     printf("Enter the value of hpMax (double) : \n");
     scanf("%lf", &hpMax);
@@ -199,8 +199,29 @@ void creatItem(){
     scanf("%s",ps);
     printf("Set flight to \"true\" or \"false\" : \n");
     scanf("%s",flight);
-
     printf("name = %s, hpMax = %lf , shield = %lf, dmg = %lf, ps = %s, ss = %s, flight = %s\n",name, hpMax, shield, dmg, ps, ss, flight);
+    FILE *file = fopen("items.itbob","a+");
+    if (file != NULL)
+    {
+        fprintf(file,"\nname=%s", name);
+        if(hpMax != 0)
+            fprintf(file,"\nhpMax=%lf", hpMax);
+        if (shield != 0)
+            fprintf(file,"\nshield=%lf", shield);
+        if (dmg != 0)
+            fprintf(file,"\ndmg=%lf", dmg);
+        if (strcmp(ps, "true") == 0)
+            fprintf(file,"\nps=true");
+        if (strcmp(ss, "true") == 0)
+            fprintf(file,"\nss=true");
+        if (strcmp(flight, "true") == 0)
+            fprintf(file,"\nflight=true");
+    }
+    else
+    {
+        printf("Impossible to open items.itbob file");
+    }
+
 
 }
 

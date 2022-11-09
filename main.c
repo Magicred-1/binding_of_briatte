@@ -15,6 +15,7 @@ int main(int argc, char const *argv[])
 
     printAllItems(Items, size);
     freeAllItems(Items, size);
+    creatItem();
     //Item *item = creatItem();
     // printItem(*item);
     //Item *itemArr [getSize("items.itbob")];
