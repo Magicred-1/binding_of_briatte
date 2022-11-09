@@ -47,18 +47,37 @@ void freeItem(Item*);
  */
 Item** getItems(char *fileName, int *itemsSize);
 
-Item **getItemz(char *fileName, int *itemsSize);
 
-void parseItems(Item** itemArr);
-
+/**
+ *
+ * @param fileName
+ * @return int number of items in file items.itboob
+ */
 int getSize(char * fileName);
 
+/**
+ * printing an array of items
+ * @param Items
+ * @param size
+ */
 void printAllItems(Item **Items, int size);
 
+/**
+ * free ana array of items
+ * @param Items
+ * @param size
+ */
 void freeAllItems(Item **Items, int size);
 
-Item *creatItem();
+/**
+ * adding an item in items.itbob
+ */
+void creatItem();
 
+/**
+ * format items.itbob before parsing
+ * @param fileName
+ */
 void formatFile(char *fileName);
 
 #endif //BINDING_OF_BRIATTE_ITEMCRUD_H

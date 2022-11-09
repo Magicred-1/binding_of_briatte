@@ -101,12 +101,10 @@ Item** getItems( char *fileName, int *itemsSize) {
             }
 
             fgets(string, 255, f);
-            //printf("my string %d = %s",i, string);
             if(string[0] == 'n') {
 
                 fseek(f, -strlen(string), SEEK_CUR);
                 fscanf(f, "name=%[^\n]s", name);
-                //printf("name = %s\n" , name);
                 fseek(f, 1, SEEK_CUR);
             }
 
@@ -177,14 +175,14 @@ Item** getItems( char *fileName, int *itemsSize) {
 }
 
 
-Item *creatItem(){
+void creatItem(){
     char name[30] ="";
     double hpMax;
     double shield;
     double dmg;
-    int ss;
-    int ps;
-    int flight;
+    char ss[30];
+    char ps[30];
+    char flight[30];
 
     printf("Enter the name of the item you want to creat : \n");
     scanf("%s",name);
@@ -196,14 +194,14 @@ Item *creatItem(){
     printf("Enter the value of dmg (double) : \n");
     scanf("%lf", &dmg);
     printf("Set ss to \"true\" or \"false\" : \n");
-    scanf("%d",&ss);
+    scanf("%s",ss);
     printf("Set ps to \"true\" or \"false\" : \n");
-    scanf("%d",&ps);
+    scanf("%s",ps);
     printf("Set flight to \"true\" or \"false\" : \n");
-    scanf("%d",&flight);
+    scanf("%s",flight);
 
-    Item *Item = newItem(name, hpMax, shield, dmg, ps, ss, flight);
-    return Item;
+    printf("name = %s, hpMax = %lf , shield = %lf, dmg = %lf, ps = %s, ss = %s, flight = %s\n",name, hpMax, shield, dmg, ps, ss, flight);
+
 }
 
 
@@ -224,13 +222,10 @@ void formatFile(char* fileName){
         }
         rewind(file);
         fclose(file);
-
-        // On peut lire et écrire dans le fichier
     }
     else
     {
-        // On affiche un message d'erreur si on veut
-        printf("Impossible d'ouvrir le fichier test.txt");
+        printf("Impossible to open items.itbob file");
     }
 
 
