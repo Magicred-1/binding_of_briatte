@@ -80,4 +80,6 @@ void creatItem();
  */
 void formatFile(char *fileName);
 
+void delItem();
+
 #endif //BINDING_OF_BRIATTE_ITEMCRUD_H

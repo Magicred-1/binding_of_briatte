@@ -1,10 +1,10 @@
 {20}
 ---
 name=<3
-hpMax=2
+hpMax=1
 ---
 name=Snack
-hpMax=9
+hpMax=1
 ---
 name=Launch
 hpMax=1
@@ -13,17 +13,17 @@ name=Black Lotus
 hpMax=1
 shield=1
 ---
-name=Bucket Of Lard
+name=Bucket of Lard
 hpMax=2
 dmg=-0.1
 ---
 name=Champion Belt
 dmg=2
 ---
-name=Blood Of TheMartyr
+name=Blood of the Martyr
 dmg=1
 ---
-name=Cat O Nine Tails
+name=Cat-O-Nine-Tails
 dmg=1
 ---
 name=Ceremonial Robes
@@ -66,14 +66,6 @@ dmg=2
 name=Raw Liver
 hpMax=2
 ---
-name=Spirit Of TheNight
+name=Spirit of the Night
 ss=true
 flight=true
----
-name=don dada
-dmg=3.330000
-ss=true
----
-name=zre
-ps=true
-ss=true

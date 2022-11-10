@@ -183,7 +183,7 @@ void creatItem(){
     char ss[30];
     char ps[30];
     char flight[30];
-
+    formatFile("items.itbob");
     printf("Enter the name of the item you want to creat : \n");
     scanf("%[^\n]s",name);
     printf("hello");
@@ -203,7 +203,7 @@ void creatItem(){
     FILE *file = fopen("items.itbob","a+");
     if (file != NULL)
     {
-        fprintf(file,"\nname=%s", name);
+        fprintf(file,"name=%s", name);
         if(hpMax != 0)
             fprintf(file,"\nhpMax=%lf", hpMax);
         if (shield != 0)
@@ -221,11 +221,7 @@ void creatItem(){
     {
         printf("Impossible to open items.itbob file");
     }
-
-
 }
-
-
 
 void freeAllItems(Item **Items, int size) {
     for (int i = 0; i < size; i++) {
@@ -233,13 +229,54 @@ void freeAllItems(Item **Items, int size) {
     }
 }
 
+void delItem(){
+    formatFile("items.itbob");
+    char item[55];
+    printf("Enter the exact name of the item you want to delete : \n");
+    scanf("%[^\n]s", item);
+    printf("item name = %s\n", item);
+    int cond = 1;
+    char data[255];
+    char str1[255]="name=";
+    strcat(str1, item);
+    strcat(str1,"\n");
+    printf("str1 :%s\n", str1);
+    FILE *f = fopen("items.itbob", "r");
+    FILE *tmp = fopen("tmp.itbob", "w+");
+    if (f != NULL)
+    {
+        while(fgets(data, 255, f) != NULL ){
+
+            if(strcmp(str1, data) == 0){
+                printf("%s\n",data);
+                printf("item found\n");
+                while(strcmp(fgets(data, 255, f) ,"---\n") != 0){
+                    continue;
+                }
+                continue;
+            }
+            fputs(data, tmp);
+
+        }
+        fclose(f);
+        fclose(tmp);
+        remove("items.itbob");
+        rename("tmp.itbob", "items.itbob");
+    }
+    else
+    {
+        printf("Impossible to open items.itbob file");
+    }
+}
+
 void formatFile(char* fileName){
     FILE *file = fopen(fileName,"a+");
+    char data[55];
     if (file != NULL)
     {
-        fseek(file,-1,SEEK_END);
-        if(fgetc(file) != '-'){
-            fputs("\n---",file);
+        fseek(file,-4,SEEK_END);
+        if(strcmp(fgets(data, 55,file), "---\n" )!=0){
+            fputs("\n---\n",file);
         }
         rewind(file);
         fclose(file);
@@ -248,11 +285,7 @@ void formatFile(char* fileName){
     {
         printf("Impossible to open items.itbob file");
     }
-
-
 }
-
-
 
 
 
