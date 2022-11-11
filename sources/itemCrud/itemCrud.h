@@ -72,7 +72,7 @@ void freeAllItems(Item **Items, int size);
 /**
  * adding an item in items.itbob
  */
-void creatItem();
+void createItem();
 
 /**
  * format items.itbob before parsing
@@ -81,5 +81,7 @@ void creatItem();
 void formatFile(char *fileName);
 
 void delItem();
+
+void changeElementNumber(char *fileName, int i);
 
 #endif //BINDING_OF_BRIATTE_ITEMCRUD_H

@@ -174,8 +174,35 @@ Item** getItems( char *fileName, int *itemsSize) {
     }
 }
 
+void changeElementNumber(char *fileName, int i){
+    int nb;
+    char data[255];
+    nb = getSize(fileName);
+    if(i == 0){
+        nb -=1;
+    }
+    if (i == 1)
+        nb +=1;
 
-void creatItem(){
+    FILE *f = fopen("items.itbob", "r");
+    FILE *tmp = fopen("tmp.itbob", "w+");
+    if (f != NULL)
+    {
+        fprintf(tmp, "{%d}\n",nb);
+        fseek(f,5,SEEK_CUR);
+        while (fgets(data, 255,f)){
+            fputs(data, tmp);
+        }
+    } else
+        printf("Cant open items.itbob");
+
+    fclose(tmp);
+    fclose(f);
+    remove("items.itbob");
+    rename("tmp.itbob", "items.itbob");
+}
+
+void createItem(){
     char name[30] ="";
     double hpMax;
     double shield;
@@ -216,11 +243,14 @@ void creatItem(){
             fprintf(file,"\nss=true");
         if (strcmp(flight, "true") == 0)
             fprintf(file,"\nflight=true");
+        
+        changeElementNumber("items.itbob", 1);
     }
     else
     {
         printf("Impossible to open items.itbob file");
     }
+
 }
 
 void freeAllItems(Item **Items, int size) {
@@ -235,7 +265,6 @@ void delItem(){
     printf("Enter the exact name of the item you want to delete : \n");
     scanf("%[^\n]s", item);
     printf("item name = %s\n", item);
-    int cond = 1;
     char data[255];
     char str1[255]="name=";
     strcat(str1, item);
@@ -267,6 +296,7 @@ void delItem(){
     {
         printf("Impossible to open items.itbob file");
     }
+    changeElementNumber("items.itbob", 0);
 }
 
 void formatFile(char* fileName){
@@ -280,11 +310,13 @@ void formatFile(char* fileName){
         }
         rewind(file);
         fclose(file);
+
     }
     else
     {
         printf("Impossible to open items.itbob file");
     }
+
 }
 
 

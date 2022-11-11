@@ -11,7 +11,8 @@ int main(int argc, char const *argv[])
     //printAllItems(Items, size);
     //freeAllItems(Items, size);
     //creatItem();
-    delItem();
+    //delItem();
+    //changeElementNumber("items.itbob",0);
     return 0;
 }
 
