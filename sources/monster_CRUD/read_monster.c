@@ -1,5 +1,5 @@
 #include "read_monsters.h"
-#include "more-string.h"
+#include "../more_string/more-string.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>

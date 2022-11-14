@@ -24,7 +24,7 @@ Room* newRoom(char** map, int x, int y, int nbLevel);
 
 // files manipulation functions
 
-void addRoom(char* file_source);
+void addRoom(char* name_file, int nbMapsToAdd);
 
 void printRoom(Room* room);
 
@@ -32,16 +32,22 @@ void checkFileExtension(char* file_source);
 
 void freeRoom(Room* room);
 
+int getLastId(char* name_file);
+
 // map manipulation functions
 
 void printMap(Room** arrayMaps, int nbMaps);
 
-// CRUD
-void createRoom(char* file_source);
+char* getAllMapName();
 
-Room** readRoom(char* file_source);
+// CRUD
+void createMap(char* file_source);
+
+Room** readMap(char* file_source, int* ptrNbMaps);
 
 // void editRoom(char* file_source, int choiceOfRoom);
+
+void deleteMap(char* file_source);
 
 void deleteRoom(Room** arrayMaps, int nbMaps);
 

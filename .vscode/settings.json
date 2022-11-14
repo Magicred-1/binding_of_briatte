@@ -1,5 +1,7 @@
 {
     "files.associations": {
-        "file_mapping.h": "c"
+        "file_mapping.h": "c",
+        "stdlib.h": "c",
+        "dirent.h": "c"
     }
 }

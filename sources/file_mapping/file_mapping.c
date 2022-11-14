@@ -1,6 +1,8 @@
 #include <stdio.h> 
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
+#include <dirent.h>
 #include "file_mapping.h"
 
 Room* newRoom(char** map, int x, int y, int nbLevel)
@@ -14,6 +16,24 @@ Room* newRoom(char** map, int x, int y, int nbLevel)
     return room;
 }
 
+int getLastId(char* name_file)
+{
+    int idMaps = 0;
+    // get the last id of the map
+    FILE *test = fopen(name_file, "r");
+    if (test != NULL)
+    {
+        fscanf(test, "{%d}\n", &idMaps);
+        fclose(test);
+        return idMaps;
+    }
+    else
+    {
+        printf("The file does not exist.\n");
+        exit(0);
+    }
+}
+
 void checkFileExtension(char* file_source)
 {
     char error_message[100] = "The file extension is not valid. Please use .rtbob for maps, .itbob for items or .mtbob for mobs\n";
@@ -22,23 +42,25 @@ void checkFileExtension(char* file_source)
 
     if (strcmp(extension, ".rtbob") != 0)
     {
-        printf("The file extension %s of the file is valid.\n", file_source);
+        // printf("The file extension %s of the file is valid.\n", file_source);
     } 
     else if (strcmp(extension, ".itbob") != 0)
     {
-        printf("The file extension %s of the file is valid.\n", file_source);
+        // printf("The file extension %s of the file is valid.\n", file_source);
     } 
     else if (strcmp(extension, ".mtbob") != 0)
     {
-        printf("The file extension %s of the file is valid.\n", file_source);
+        // printf("The file extension %s of the file is valid.\n", file_source);
     }
     else
     {
         printf("%s", error_message);
+        exit(0);
+        free(file_source);
     }
 }
 
-void createRoom(char* name_file)
+void createMap(char* name_file)
 {
     /*
         Getting the parameters 
@@ -55,6 +77,7 @@ void createRoom(char* name_file)
 
     int file_test_lines = fgetc(test);
 
+    // we check is the file as not been written inside yet
     if (file_test_lines == EOF)
     { 
 
@@ -63,8 +86,8 @@ void createRoom(char* name_file)
         // check if the file exists and the file extension is .rtbob
         checkFileExtension(tmp);
 
-        int size_x = 0;
-        int size_y = 0;
+        int size_x;
+        int size_y;
         int idMaps = 0;
         int nbMaps = 0;
         char c;
@@ -80,34 +103,44 @@ void createRoom(char* name_file)
                 idMaps = i + 1;
                 // get the size of the map of each map created
 
-                printf("Enter the size of the map number %d.\n(For example : 7 16 = a map of size 7x16)\n", i += 1);
+                printf("Enter the size of the map number %d.\n(For example : 7 16 = a map of size 7x16)\n", i+1);
                 scanf("%d %d", &size_x, &size_y);
+                
+                /* 
+                    we want to both verify that the user inputs are numbers
+                    the size of the map to be between 1 and 100
+                */
+                if (isdigit(size_x) && isdigit(size_y))
+                {
+                    if (size_x >= 1 && size_x <= 100 && size_y >= 1 && size_y <= 100) 
+                    {
+                        printf("\nThe size of the map is not valid.\nPlease enter a size between 1 and 100.\n");
+                        // if the size is not valid we delete the file and exit the program
+                        remove(tmp);
+                        exit(0);
+                    }
+                }
 
-                if (size_x > 0 && size_y < 100)
-                {
-                    printf("The size of the map can't be negative.\n");
-                    exit(0);
-                }
-                else
-                {
-                    fseek(f, 0, SEEK_END);
-                    fprintf(f, "[%d|%d]%d\n", size_x, size_y);
-                }
+                fseek(f, 0, SEEK_END);
+                fprintf(f, "[%d|%d]%d\n", size_x, size_y, idMaps);
+
+                fflush(stdin);
             
                 for (int i = 0; i < size_x; i += 1)
                 {
                     for (int j = 0; j < size_y; j += 1)
                     {
                         printf("Enter the character at the position (%d, %d) : ", i, j);
-                        scanf(" %c", &c);
+                        scanf("%c", &c);
 
                         if (c >= 'A' && c <= 'Z')
                         {
-                            fprintf(f, "%c", c);
+                            fprintf(f, "%c ", c);
                         }
                         else
                         {
                             printf("The character %c is not valid.\n Please enter a character between A and Z.\n", c);
+                            fflush(stdin);
                             j -= 1;
                         }
                     }
@@ -124,7 +157,7 @@ void createRoom(char* name_file)
     }
 }
 
-Room** readRoom(char* file_source)
+Room** readMap(char* file_source, int* ptrNbMaps)
 {
     char tmp[50];
         
@@ -152,7 +185,8 @@ Room** readRoom(char* file_source)
         int size_y = 0;
 
         fscanf(f, "{%d}\n", &nbMaps);
-        int *ptrNbMaps = nbMaps;
+
+        *ptrNbMaps = nbMaps;
         //printf("nbMaps : %d\n", nbMaps);
 
         Room** Maps_Created = malloc(sizeof(Room)*nbMaps);
@@ -175,7 +209,7 @@ Room** readRoom(char* file_source)
 
                 for (int j = 0; j < size_x; j += 1)
                 {
-                    for (int k = 0; k < size_y*2-1; k += 1)
+                    for (int k = 0; k < size_y * 2 - 1; k += 1)
                     {
                         fscanf(f, "%c", &c);
                         map[j][k] = c;
@@ -186,7 +220,7 @@ Room** readRoom(char* file_source)
                 { */
                     // printf(Rooms_Created[l]->map[0]);
                 // }
-                Maps_Created[indexArrayMaps] = newRoom(map, size_x, size_y*2-1, idMaps);
+                Maps_Created[indexArrayMaps] = newRoom(map, size_x, size_y * 2 - 1, idMaps);
                 indexArrayMaps += 1;
             }
 
@@ -198,6 +232,36 @@ Room** readRoom(char* file_source)
         fclose(f);
         return Maps_Created;
     }
+}
+
+char* getAllMapName()
+{
+    // we get the name of all the maps in the folder /ressources/maps and then return the array of names and print them
+    DIR *d;
+    struct dirent *dir;
+    d = opendir("./ressources/maps");
+    char* allMapsName = malloc(sizeof(char)*50);
+    int index = 0;
+
+    if (d)
+    {
+        while ((dir = readdir(d)) != NULL)
+        {
+            if (strcmp(dir->d_name, ".") != 0 && strcmp(dir->d_name, "..") != 0)
+            {
+                // we check if the file extension is .rtbob
+                checkFileExtension(dir->d_name);
+
+                // we get the name of the file without the extension
+                char* name = strtok(dir->d_name, ".");
+                printf("%s\n", name);
+                allMapsName[index] = *name;
+                index += 1;
+            }
+        }
+        closedir(d);
+    }
+    return allMapsName;
 }
 
 // We can use this function to free the memory and avoid memory leaks
@@ -230,9 +294,7 @@ void printMap(Room** mapsArray, int nbMaps)
     }
 }
 
-
-
-void addRoom(char* name_file)
+void addRoom(char* name_file, int nbMapsToAdd)
 {
     /*
         Getting the parameters 
@@ -250,40 +312,64 @@ void addRoom(char* name_file)
     // check if the file exists and the file extension is .rtbob
     checkFileExtension(tmp);
 
-    int size_x = 0;
-    int size_y = 0;
+    int size_x;
+    int size_y;
     int idMaps = 0;
+    int nbMaps = 0;
     char c;
-        
-    printf("Enter the size of the map.\n(For example : 7 16 = a map of size 7x16)\n");
-    scanf("%d %d", &size_x, &size_y);
-    printf("Enter the id of the map : ");
-    scanf("%d", &idMaps);
-    fprintf(f, "{%d}\n[%d|%d]%d", idMaps,size_x, size_y, idMaps);
 
-        fseek(f, 0, SEEK_SET);
-        if (fscanf(f, "{%d}\n") >= idMaps && idMaps > 0)
-        {
-            fprintf(f, "{%d}\n", idMaps);
-        }
-        else
-        {
-            printf("Enter the id of the map : ");
-            scanf("%d", &idMaps);
-        }
-        fseek(f, 0, SEEK_END);
- 
-        fprintf(f, "\n[%d|%d]%d", size_y, size_x, idMaps);
-
-        for (int i = 0; i < size_x; i += 1)
-        {
-            for (int j = 0; j < size_y; j += 1)
+    // we add the room to the file
+    for (int i = 0; i < nbMapsToAdd+1; i += 1)
             {
-                printf("Enter the character at the position (%d, %d) : ", i, j);
-                scanf(" %c", &c);
-                fprintf(f, "%c", c);
+                idMaps = i + 1;
+                // get the size of the map of each map created
+                getLastId(tmp);
+
+                printf("Enter the size of the map number %d.\n(For example : 7 16 = a map of size 7x16)\n", i+1);
+                scanf("%d %d", &size_x, &size_y);
+                
+                /* 
+                    we want to both verify that the user inputs are numbers
+                    the size of the map to be between 1 and 100
+                */
+                if (isdigit(size_x) && isdigit(size_y))
+                {
+                    if (size_x >= 1 && size_x <= 100 && size_y >= 1 && size_y <= 100) 
+                    {
+                        printf("\nThe size of the map is not valid.\nPlease enter a size between 1 and 100.\n");
+                        // if the size is not valid we delete the file and exit the program
+                        remove(tmp);
+                        exit(0);
+                    }
+                }
+
+                fseek(f, 0, SEEK_END);
+                fprintf(f, "[%d|%d]%d\n", size_x, size_y, idMaps);
+
+                fflush(stdin);
+            
+                for (int i = 0; i < size_x; i += 1)
+                {
+                    for (int j = 0; j < size_y; j += 1)
+                    {
+                        printf("Enter the character at the position (%d, %d) : ", i, j);
+                        scanf("%c", &c);
+
+                        if (c >= 'A' && c <= 'Z')
+                        {
+                            fprintf(f, "%c ", c);
+                        }
+                        else
+                        {
+                            printf("The character %c is not valid.\n Please enter a character between A and Z.\n", c);
+                            fflush(stdin);
+                            j -= 1;
+                        }
+                    }
+                    fprintf(f, "\n");
+                }
+                fprintf(f, "\n");
             }
-        }
         fclose(f);
 }
 
