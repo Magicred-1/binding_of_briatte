@@ -1,34 +1,52 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "./sources/file_mapping/file_mapping.h"
+#include "../file_mapping/file_mapping.h"
 
-// create a simple CLI to test the map commands
+
+// create a simple CLI to test the map CRUD commands
 void cli_start()
 {
-    printf("Welcome to the Binding of Briatte CLI for the maps.\n");
-    printf("Please enter the path to the file you want to use.\n");
-    printf("Example: ./ressources/maps/config.rtbob\n");
-    printf("Path: ");
+    // create a map
+    printf("1. Create a map\n");
 
-    char* path = malloc(sizeof(char) * 100);
-    scanf("%s", path);
+    // edit a map
+    printf("2. Edit a map\n");
 
-    printf("You entered: %s\n", path);
+    // play a map
+    printf("3. Play a map\n");
 
-    printf("Please enter the size of the map you want to create : \n For example : 9 x 15\n");
-    printf("Size: ");
+    printf("Choose an option between 1 and 3 : ");
 
-    int x, y;
-    scanf("%d %d", &x, &y);
+    char option = scanf("%d", &option);
 
-    printf("You entered: %d x %d\n", x, y);
+    // printf("You entered: %d", res);
 
-    printf("Please enter the number of levels you want to create : \n For example : 3\n");
-    printf("Number of levels: ");
+    switch (option)
+    {
+        case 1:
+            printf("You choose to create a map\n");
+            char* map_name = malloc(sizeof(char) * 50);
+            printf("Enter the name of the map you want to create : ");
+            cli_create_map(map_name);
+            break;
+        case 2:
+            // cli_edit_map();
+            break;
+        case 3:
+            // cli_play_map();
+            break;
+        default:
+            printf("Please enter a number between 1 and 3\n");
+            break;
+    }
+}
 
-    int nbLevel;
+void cli_create_map(char* map_name)
+{
+    createMap(map_name);
+}
 
-    scanf("%d", &nbLevel);
+void cli_play_map()
+{
 
-    printf("You entered: %d\n", nbLevel);
 }
