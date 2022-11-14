@@ -98,12 +98,12 @@ void createMap(char* name_file)
         fseek(f, 0, SEEK_SET);
         fprintf(f, "{%d}\n", nbMaps);
         
-            for (int i = 0; i < nbMaps+1; i += 1)
+            for (int i = 1; i < nbMaps+1; i += 1)
             {
                 idMaps = i + 1;
                 // get the size of the map of each map created
 
-                printf("Enter the size of the map number %d.\n(For example : 7 16 = a map of size 7x16)\n", i+1);
+                printf("Enter the size of the map number %d.\n(For example : 7 16 = a map of size 7x16)\n", i);
                 scanf("%d %d", &size_x, &size_y);
                 
                 /* 
@@ -116,31 +116,30 @@ void createMap(char* name_file)
                     {
                         printf("\nThe size of the map is not valid.\nPlease enter a size between 1 and 100.\n");
                         // if the size is not valid we delete the file and exit the program
-                        remove(tmp);
+                        // TO-DO : remove(tmp);
                         exit(0);
                     }
                 }
 
                 fseek(f, 0, SEEK_END);
                 fprintf(f, "[%d|%d]%d\n", size_x, size_y, idMaps);
-
-                fflush(stdin);
             
                 for (int i = 0; i < size_x; i += 1)
                 {
                     for (int j = 0; j < size_y; j += 1)
                     {
                         printf("Enter the character at the position (%d, %d) : ", i, j);
+                        fflush(stdin);
                         scanf("%c", &c);
+                        printf("%c", c);
 
-                        if (c >= 'A' && c <= 'Z')
+                        if ((c >= 'A' && c <= 'Z') || c == ' ')
                         {
                             fprintf(f, "%c ", c);
                         }
                         else
                         {
                             printf("The character %c is not valid.\n Please enter a character between A and Z.\n", c);
-                            fflush(stdin);
                             j -= 1;
                         }
                     }
@@ -315,17 +314,17 @@ void addRoom(char* name_file, int nbMapsToAdd)
     int size_x;
     int size_y;
     int idMaps = 0;
-    int nbMaps = 0;
     char c;
 
     // we add the room to the file
     for (int i = 0; i < nbMapsToAdd+1; i += 1)
-            {
-                idMaps = i + 1;
-                // get the size of the map of each map created
-                getLastId(tmp);
+    {
+        // get the size of the map of each map already created in the file
+        idMaps = getLastId(tmp);
+        printf("idMaps : %d\n", idMaps);
+        idMaps += nbMapsToAdd;
 
-                printf("Enter the size of the map number %d.\n(For example : 7 16 = a map of size 7x16)\n", i+1);
+        printf("Enter the size of the map number %d.\n(For example : 7 16 = a map of size 7x16)\n", i+nbMapsToAdd);
                 scanf("%d %d", &size_x, &size_y);
                 
                 /* 

@@ -8,6 +8,5 @@ int main(int argc, char const *argv[])
     int nbMaps = 0;
     // createRoom("test");
     // createMap("test2");
-    char* test2 = getAllMapName();
-    return 0;
+    createMap("test3");
 }
