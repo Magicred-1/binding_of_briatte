@@ -5,8 +5,7 @@
 
 int main(int argc, char const *argv[])
 {
-    int nbMaps = 0;
-    // createRoom("test");
-    // createMap("test2");
-    createMap("test3");
+    // launch the CLI
+    cli_start();
+    return 0;
 }

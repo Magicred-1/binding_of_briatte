@@ -22,33 +22,29 @@ typedef struct Room Room;
 
 Room* newRoom(char** map, int x, int y, int nbLevel);
 
-// files manipulation functions
+// files manipulation functions and test functions
 
-void addRoom(char* name_file, int nbMapsToAdd);
+int getLastId();
 
-void printRoom(Room* room);
-
-void checkFileExtension(char* file_source);
+void checkFileExtension();
 
 void freeRoom(Room* room);
 
-int getLastId(char* name_file);
+void printRoom(Room* room);
 
 // map manipulation functions
 
 void printMap(Room** arrayMaps, int nbMaps);
 
-char* getAllMapName();
+void editRoom(int choiceOfRoom);
 
 // CRUD
-void createMap(char* file_source);
+void createMap();
 
-Room** readMap(char* file_source, int* ptrNbMaps);
+Room** readMap(int* ptrNbMaps);
 
-// void editRoom(char* file_source, int choiceOfRoom);
+void updateMap(int choiceOfRoom);
 
-void deleteMap(char* file_source);
-
-void deleteRoom(Room** arrayMaps, int nbMaps);
+void deleteRoom(Room** arrayMaps);
 
 #endif //FILE_MAPPING_H
