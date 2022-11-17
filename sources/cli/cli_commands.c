@@ -26,9 +26,8 @@ void cliStart()
 
 void cliSelector()
 {
-    int answer = getOption();
     printf("\t1. Map Editor\n\t2. Monsters Editor\n\t3. Items Editor\n\t4. Exit\n");
-    printf("Please select which which editor you want to use : ");
+    int answer = getOption();
 
     switch (answer)
     {
@@ -87,23 +86,24 @@ void mapEditor()
             // Create Map
             case '1':
                 createMap(); // if file exists redirect to updateMap
-                
+                break;
             // Read Map all maps
             case '2':
                 printMap(mapsArray, nbMaps);
-
+                break;
             // Update Map
             case '3':
                 updateMap(numMaps);
-
+                break;
             // Delete Map
             case '4':
                 printMap(mapsArray, nbMaps);
                 deleteRoom(mapsArray);
+                break;
             // Play game
             case '5':
                 printf("Coming soon ...\n");
-
+                break;
             // Exit
             case '6':
                 printf("Bye bye\n");
@@ -112,6 +112,7 @@ void mapEditor()
 
             default:
                 printf("Please enter a number between 1 and 6\n");
+                break;
         }
     }
 }
@@ -143,15 +144,15 @@ void itemEditor()
             // Create Item
             case '1':
                 printf("Coming soon ...\n");
-
+                break;
             // Read Item
             case '2':
                 printf("Coming soon ...\n");
-
+                break;
             // Delete Item
             case '3':
                 printf("Coming soon ...\n");
-
+                break;
             // Exit
             case '4':
                 printf("Bye bye\n");
@@ -160,6 +161,7 @@ void itemEditor()
 
             default:
                 printf("Please enter a number between 1 and 4\n");
+                break;
         }
     }
     
@@ -169,6 +171,7 @@ void monsterEditor()
 {
     while (1)
     {
+        fflush(stdin);
         // Display the menu
         printf("Choose an option between 1 and 4 :\n\n");
 
@@ -192,15 +195,15 @@ void monsterEditor()
             // Create Monster
             case '1':
                 printf("Coming soon ...\n");
-
+                break;
             // Read Monster
             case '2':
                 printf("Coming soon ...\n");
-
+                break;
             // Delete Monster
             case '3':
                 printf("Coming soon ...\n");
-
+                break;
             // Exit
             case '4':
                 printf("Bye bye\n");
