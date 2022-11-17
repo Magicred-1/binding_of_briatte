@@ -26,6 +26,8 @@ Room* newRoom(char** map, int x, int y, int nbLevel);
 
 int getLastId();
 
+void deleteRoomFromFile(int roomID);
+
 void checkFileExtension();
 
 void freeRoom(Room* room);

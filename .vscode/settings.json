@@ -4,6 +4,7 @@
         "stdlib.h": "c",
         "dirent.h": "c",
         "cli_commands.h": "c",
-        "file_extension_checker.h": "c"
+        "file_extension_checker.h": "c",
+        "get_color.h": "c"
     }
 }

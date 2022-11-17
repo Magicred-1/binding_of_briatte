@@ -1,5 +1,5 @@
 /*
-**  Filename : file_mapping.h
+**  Filename : game_run.h
 **
 **  Made by : Djason Gadiou <djason.gadiou.sio@gmail.com>
 **
@@ -17,5 +17,7 @@ typedef enum
     RIGHT = 77,
     SPACE = 32
 } touche;
+
+void playerMovement();
 
 #endif /* GAME_RUN_H_ */

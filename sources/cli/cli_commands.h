@@ -7,12 +7,30 @@
 */
 
 #ifndef CLI_COMMANDS_H_
-# define CLI_COMMANDS_H_
+#define CLI_COMMANDS_H_
 
-void cli_start();
+void cliStart();
 
-void map_editor();
+// selection between map editor / item editor / monster editor
+void cliSelector();
 
-void launch_splash_screen();
+// CRUD of Map / Monsters / Items
+// Map Editor is launched
+void mapEditor();
+
+// Monster Editor is launched
+void monsterEditor();
+
+// Item Editor is launched
+void itemEditor();
+
+// ASCII Text Art Text Title
+void launchTextTitle();
+
+// Get the option from the user
+int getOption();
+
+// Get the map ID from the file
+void getLatestDatas();
 
 #endif /* !CLI_COMMANDS_H_ */
