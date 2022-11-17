@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+
 #include "file_mapping.h"
 #include "../file_extension_checker/file_extension_checker.h"
 
@@ -367,26 +368,10 @@ void updateMap(int choiceOfRoom)
         fclose(f2);
 
         // we delete the old file
-        if (remove(temporarySource) == 0)
-        {
-            printf("The old file has been deleted.\n");
-        }
-        else
-        {
-            // if the file cannot be deleted we exit the program
-            printf("The old file could not be deleted.\n");
-        }
+        remove(temporarySource);
 
-        if (rename(temporarySource2, temporarySource) == 0)
-        {
-            // we rename the temporarySource2 file to temporarySource ("./ressources/maps/config.rtbob")
-            printf("The new file has been created.\n");
-        }
-        else
-        {
-            // failed to rename the file
-            printf("The new file could not be created.\n");
-        }
+        // we rename the new file
+        rename(temporarySource2, temporarySource);
     }
 }
 

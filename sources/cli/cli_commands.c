@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "../file_mapping/file_mapping.h"
 #include "../cli/cli_commands.h"
 #include "../read_monsters/read_monster.h"
+
 #define MAX_LEN 200
 
 // RGB COLOR in console for the better display
@@ -26,21 +28,27 @@ void cliStart()
 
 void cliSelector()
 {
+    clear();
     printf("\t1. Map Editor\n\t2. Monsters Editor\n\t3. Items Editor\n\t4. Exit\n");
     int answer = getOption();
 
     switch (answer)
     {
+        // Map
         case '1':
             mapEditor();
             break;
+        // Monster
         case '2':
             monsterEditor();
             break;
+        // Items
         case '3':
-            //itemEditor();
+            itemEditor();
             break;
+        // Exit
         case '4':
+            printf("Bye bye !\n");
             exit(0);
             break;
         default:
