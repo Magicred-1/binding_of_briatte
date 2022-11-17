@@ -44,8 +44,8 @@ int getLastId()
     }
     else
     {
-        printf("The map file has be created.\n\n");
-        createMap();
+        printf("The map file is empty.\n\n");
+        // createMap();
         exit(0);
     }
 }
