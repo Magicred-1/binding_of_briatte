@@ -43,6 +43,7 @@
 # *.ipr
 
 ressources/maps/config.rtbob
+ressources/maps/config2.rtbob
 
 # CMake
 cmake-build-*/
