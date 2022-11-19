@@ -1,8 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
+
 #include "../file_mapping/file_mapping.h"
 #include "../cli/cli_commands.h"
 #include "../read_monsters/read_monster.h"
+
 #define MAX_LEN 200
 
 // RGB COLOR in console for the better display
@@ -26,30 +28,36 @@ void cliStart()
 
 void cliSelector()
 {
-    printf("\t1. Map Editor\n\t2. Monsters Editor\n\t3. Items Editor\n\t4. Exit\n");
+    printf("\t1. Map Editor\n\t2. Items Editor\n\t3. Exit\n");
     int answer = getOption();
 
     switch (answer)
     {
+        // Map
         case '1':
             mapEditor();
             break;
-        case '2':
+        // Monster
+        /* case '2':
             monsterEditor();
+            break;*/
+        // Items
+        case '2':
+            itemEditor();
             break;
+        // Exit
         case '3':
-            //itemEditor();
-            break;
-        case '4':
+            printf("Bye bye !\n");
             exit(0);
             break;
         default:
-            printf("Please select a valid option");
+            printf("Please select a valid option between 1 and 3\n");
     }
 }
 
 void mapEditor()
 {   
+    fflush(stdin);
     while (1)
     {
         // We get the latest datas from the array of maps
@@ -119,6 +127,7 @@ void mapEditor()
 
 void itemEditor()
 {
+    fflush(stdin);
     while (1)
     {
         // Display the menu
@@ -167,8 +176,9 @@ void itemEditor()
     
 }
 
-void monsterEditor()
+/* void monsterEditor()
 {
+    fflush(stdin);
     while (1)
     {
         fflush(stdin);
@@ -215,7 +225,7 @@ void monsterEditor()
         }
     }
     
-}
+} */
 
 // Display the ASCII Text Title
 void launchTextTitle()
