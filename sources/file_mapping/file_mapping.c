@@ -5,12 +5,13 @@
 
 #include "file_mapping.h"
 #include "../file_extension_checker/file_extension_checker.h"
+#include "../cli/cli_commands.h"
 
-// RGB COLOR in console for the better display
-#define RED   "\x1B[31m"
-#define GREEN   "\x1B[32m"
-#define BLUE   "\x1B[34m"
-#define YELLOW   "\x1B[33m"
+// RGB BOLD COLOR in console for the better display
+#define RED   "\x1B[1;31m"
+#define GREEN   "\x1B[1;32m"
+#define BLUE   "\x1B[1;34m"
+#define YELLOW   "\x1B[1;33m"
 #define RESET "\x1B[0m"
 
 Room* newRoom(char** map, int x, int y, int nbLevel)
@@ -38,6 +39,8 @@ int getLastId()
             get the last ID of the map 
             (number of max rooms created) 
             inside the map file.
+
+            return the last ID of the map
         */
         fscanf(file, "{%d}\n", &idMaps);
         fclose(file);
@@ -46,29 +49,108 @@ int getLastId()
     else
     {
         printf("The map file is empty.\n\n");
-        // createMap();
+        createMap();
+    }
+}
+
+void deleteMapFromFile()
+{
+    // 'w' mode removes all the content of the file
+    FILE *file = fopen("./ressources/maps/config.rtbob", "w");
+    FILE *temporaryFile = fopen("./ressources/maps/config2.rtbob", "w");
+
+    if (file != NULL)
+    {
+        fclose(file);
+        printf(""RED "The map file has been deleted." RESET"\n\n");
+        if (temporaryFile != NULL)
+        {
+            fclose(temporaryFile);
+            remove("./ressources/maps/config2.rtbob");
+        }
+    }
+    else
+    {
+        printf("The map file is empty.\n\n");
     }
 }
 
 void deleteRoomFromFile(int roomID) //TODO
 {
-    int idMaps = roomID;
+    char temporaryFile[80] = "./ressources/maps/config.rtbob";
+    char temporaryFile2[80] = "./ressources/maps/config2.rtbob";
+
+    char character;
+
+    int idMaps = 0;
     int size_x = 0;
     int size_y = 0;
-    int nbMaps = getLastId();
+    // get all the exist maps except the one to delete
+    int nbMaps = getLastId() - 1;
 
-    FILE *file = fopen("./ressources/maps/config.rtbob", "r");
-    FILE *fileTemp = fopen("./ressources/maps/configTemp.rtbob", "w");
+    FILE *file = fopen(temporaryFile, "r");
+    FILE *fileTemp = fopen(temporaryFile2, "w");
 
-    char getCharacter;
     if (file != NULL)
     {
-        while (fgetc(file) != EOF)
+        fscanf(fileTemp, "{%d}\n", &nbMaps);
+        for (int i = 0; i < nbMaps; i += 1)
         {
-            fprintf(fileTemp, "{%d}\n", nbMaps = nbMaps - idMaps);
+            fscanf(file, "[%d|%d]%d\n",&size_x, &size_y, &idMaps);
+            // we filter the map the user want to delete
+            if(fscanf(file, "]%d\n", &idMaps) != roomID)
+            {
+                fprintf(fileTemp, "[%d|%d]%d\n", size_x, size_y, idMaps);
+                for (int j = 0; j < size_x; j += 1)
+                {
+                    for (int k = 0; k < size_y * 2 - 1; k += 1)
+                    {
+                        fscanf(file, "%c", &character);
+                        fprintf(fileTemp, "%c", character);
+                    }
+                    fscanf(file, "\n");
+                    fprintf(fileTemp, "\n");
+                }
+                fprintf(fileTemp, "\n");
+            }
+            else
+            {
+                fseek(file, size_x * size_y * 2, SEEK_CUR);
+            }
         }
     }
+    else
+    {
+        printf(""RED "The map file is empty." RESET"\n\n");
+        fclose(file);
+        fclose(fileTemp);
+    }
+
+    // we close files first
+    fclose(file);
+    fclose(fileTemp);
+
+    // we delete the old file
+    if (remove(temporaryFile) == 0)
+    {
+        printf(""BLUE "\nThe file %s has been deleted." RESET"\n", temporaryFile);
+    }
+    else
+    {
+        printf(""RED "\nThe file %s could not be deleted." RESET"\n", temporaryFile);
+    }
+    
+    // we rename the new file like the old one
+    if (rename(temporaryFile, temporaryFile2) == 0)
+    {
+        printf(""RED "\nThe file %s has been renamed." RESET"\n", temporaryFile2);
+    }
+    else
+    {
+        printf(""BLUE "\nThe file %s could not be renamed." RESET"\n", temporaryFile2);
+    }
 }    
+
 // We can use this function to free the memory and avoid memory leaks
 void freeRoom(Room* room)
 {
@@ -92,8 +174,10 @@ void printMap(Room** mapsArray, int nbMaps)
 
         for (int i = 0; i < nbMaps; i += 1)
         {
-            printf("Map number : " YELLOW "%d\n" RESET "", mapsArray[i]->nbLevel);
+            printf("Map ID : " YELLOW "%d\n" RESET "", mapsArray[i]->nbLevel);
+
             printf("[%d|%d]" YELLOW "%d" RESET"\n", mapsArray[i]->x, (mapsArray[i]->y+1)/2, mapsArray[i]->nbLevel);
+
             for (int j = 0; j < mapsArray[i]->x; j += 1)
             {
                 for (int k = 0; k < mapsArray[i]->y; k += 1)
@@ -118,14 +202,15 @@ void createMap()
         Getting the parameters 
         value from the function into a char with extra line
     */
-    char tmp[80] = "./ressources/maps/config.rtbob";
+    char temporaryFile[80] = "./ressources/maps/config.rtbob";
 
-    FILE *f = fopen(tmp, "a");
+    FILE *f = fopen(temporaryFile, "r");
 
-    if (f == NULL)
+    if (fgetc(f) == EOF)
     {
+        FILE *f = fopen(temporaryFile, "a");
         // check if the file exists and the file extension is .rtbob
-        checkFileExtension(tmp);
+        checkFileExtension(temporaryFile);
 
         int size_x;
         int size_y;
@@ -166,11 +251,11 @@ void createMap()
 
                 fflush(stdin);
             
-                for (int i = 0; i < size_x; i += 1)
+                for (int j = 0; j < size_x; j += 1)
                 {
-                    for (int j = 0; j < size_y; j += 1)
+                    for (int k = 0; k < size_y; k += 1)
                     {
-                        printf("Enter the character at the position (%d, %d) : ", i, j);
+                        printf("Enter the character at the position (%d, %d) : ", j + 1, k + 1);
                         fflush(stdin);
                         scanf("%c", &c);
 
@@ -183,7 +268,7 @@ void createMap()
                         {
                             printf("The character %c is not valid.\n Please enter a character between A and Z.\n", c);
                             fflush(stdin);
-                            j -= 1;
+                            k -= 1;
                         }
                     }
                     fprintf(f, "\n");
@@ -247,27 +332,17 @@ Room** readMap(int* ptrNbMaps)
                     }
                     fscanf(f, "\n");
                 }
-                /* for (int l = 0; l < nbMaps; l += 1)
-                { */
-                    // printf(Rooms_Created[l]->map[0]);
-                // }
                 Maps_Created[indexArrayMaps] = newRoom(map, size_x, size_y * 2 - 1, idMaps);
                 indexArrayMaps += 1;
             }
-
-            /* TO_IMPROVE for stages : for (int room = 0; room < nbMaps; room += 1)
-            {
-                Rooms_Created[room] = room;
-            } */
-
         fclose(f);
         return Maps_Created;
 }
 
 void updateMap(int choiceOfRoom)
 {
-    char tmp[80] = "./ressources/maps/config.rtbob";
-    char tmp2[80] = "./ressources/maps/config2.rtbob";
+    char temporaryFile[80] = "./ressources/maps/config.rtbob";
+    char temporaryFile2[80] = "./ressources/maps/config2.rtbob";
 
     char character;
 
@@ -275,19 +350,14 @@ void updateMap(int choiceOfRoom)
     int idMaps = 0;
     int size_x = 0;
     int size_y = 0;
-
-    if (choiceOfRoom == 0)
-    {
-        printf("You have to create a Map first to update.\n");
-        return;
-    }
     
-    FILE *f = fopen(tmp, "r");
-    FILE *f2 = fopen(tmp2, "w");
+    FILE *f = fopen(temporaryFile, "r");
+    FILE *f2 = fopen(temporaryFile2, "w");
+
 
     fscanf(f, "{%d}\n", &nbMaps);
 
-    fprintf(f2, "{%d}\n", nbMaps+1);
+    fprintf(f2, "{%d}\n", nbMaps + 1);
 
     for (int i = 0; i < nbMaps; i += 1)
     {
@@ -336,11 +406,11 @@ void updateMap(int choiceOfRoom)
 
     fflush(stdin);
             
-    for (int i = 0; i < size_x; i += 1)
+    for (int m = 0; m < size_x; m += 1)
     {
-        for (int j = 0; j < size_y; j += 1)
+        for (int l = 0; l < size_y; l += 1)
         {
-            printf("Enter the character at the position (%d, %d) : ", i, j);
+            printf("Enter the character at the position (%d, %d) : ", m + 1, l + 1);
             fflush(stdin);
             scanf("%c", &character);
 
@@ -352,7 +422,8 @@ void updateMap(int choiceOfRoom)
             {
                 printf("The character %c is not valid.\n Please enter a character between A and Z.\n", character);
                 fflush(stdin);
-                j -= 1;
+                // if the character is not valid we ask the user to enter a new one and flush the buffer
+                l -= 1;
             }
         }
         fprintf(f2, "\n");
@@ -364,23 +435,23 @@ void updateMap(int choiceOfRoom)
     fclose(f2);
 
     // we delete the old file
-    if (remove(tmp) == 0)
+    if (remove(temporaryFile) == 0)
     {
-        printf("The file %s has been deleted.\n", tmp);
+        printf("\nThe file %s has been deleted.\n", temporaryFile);
     }
     else
     {
-        printf("The file %s could not be deleted.\n", tmp);
+        printf("\nThe file %s could not be deleted.\n", temporaryFile);
     }
     
     // we rename the new file like the old one
-    if (rename(tmp2, tmp) == 0)
+    if (rename(temporaryFile2, temporaryFile) == 0)
     {
-        printf("The file %s has been renamed.\n", tmp2);
+        printf("\nThe file %s has been renamed.\n", temporaryFile2);
     }
     else
     {
-        printf("The file %s could not be renamed.\n", tmp2);
+        printf("\nThe file %s could not be renamed.\n", temporaryFile2);
     }
 }
 
@@ -396,7 +467,7 @@ void deleteRoom(Room** arrayMaps)
     {
         if (arrayMaps[i]->nbLevel == idMaps)
         {
-            //TODO deleteRoomFromFile(arrayMaps[i]->nbLevel);
+            deleteRoomFromFile(arrayMaps[i]->nbLevel);
             freeRoom(arrayMaps[i]);
             arrayMaps[i] = NULL;
             printf("The map number %d has been deleted.\n", arrayMaps[i]->nbLevel);

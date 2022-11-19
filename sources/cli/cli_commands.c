@@ -7,11 +7,11 @@
 
 #define MAX_LEN 200
 
-// RGB COLOR in console for the better display
-#define RED   "\x1B[31m"
-#define GREEN   "\x1B[32m"
-#define BLUE   "\x1B[34m"
-#define YELLOW   "\x1B[33m"
+// RGB BOLD COLOR in console for the better display
+#define RED   "\x1B[1;31m"
+#define GREEN   "\x1B[1;32m"
+#define BLUE   "\x1B[1;34m"
+#define YELLOW   "\x1B[1;33m"
 #define RESET "\x1B[0m"
 
 // create a simple CLI to test the map CRUD commands
@@ -28,30 +28,35 @@ void cliStart()
 
 void cliSelector()
 {
-    printf("\t1. Map Editor\n\t2. Items Editor\n\t3. Exit\n");
-    int answer = getOption();
-
-    switch (answer)
+    fflush(stdin);
+    while (1)
     {
-        // Map
-        case '1':
-            mapEditor();
-            break;
-        // Monster
-        /* case '2':
-            monsterEditor();
-            break;*/
-        // Items
-        case '2':
-            itemEditor();
-            break;
-        // Exit
-        case '3':
-            printf("Bye bye !\n");
-            exit(0);
-            break;
-        default:
-            printf("Please select a valid option between 1 and 3\n");
+        fflush(stdin);
+        printf("\t1. Map Editor\n\t2. Items Editor\n\t3. Exit\n");
+        int answer = getOption();
+
+        switch (answer)
+        {
+            // Map
+            case '1':
+                mapEditor();
+                break;
+            // Monster
+            /* case '2':
+                monsterEditor();
+                break;*/
+            // Items
+            case '2':
+                itemEditor();
+                break;
+            // Exit
+            case '3':
+                printf("Bye bye !\n");
+                exit(0);
+                break;
+            default:
+                printf("Please select a valid option between 1 and 3\n");
+        }
     }
 }
 
@@ -63,61 +68,116 @@ void mapEditor()
         // We get the latest datas from the array of maps
         int nbMaps = 0;
         Room** mapsArray = readMap(&nbMaps);
+        // Prepare update & delete choice options
+        int updateChoice = 0;
+        int deleteChoice = 0;
+
         // numMaps updates everytime we add a new map automatically
         int numMaps = getLastId();
+
+        // we use it for Delete & Update purpose
+        int roomID = 0;
 
         // Display the menu
         printf("Choose an option between 1 and 6 :\n\n");
 
         // create a map
-        printf("\t1. Create a map..\n");
+        printf("\t1. Create the map..\n");
 
         // read map
-        printf("\t2. Read a map..\n");
+        printf("\t2. Read the map..\n");
 
         // update map
-        printf("\t3. Update a map..\n");
+        printf("\t3. Update the map..\n");
 
         // delete map
-        printf("\t4. Delete a map..\n");
+        printf("\t4. Delete the map..\n");
 
         // play game
-        printf("\t5. Play game..\n");
+        printf("\t5. Play the game..\n");
+
         // exit
         printf("\t6. Exit..\n\n");
 
         int res = getOption();
 
         fflush(stdin);
+
         switch (res)
         {
             // Create Map
             case '1':
                 createMap(); // if file exists redirect to updateMap
                 break;
+
             // Read Map all maps
             case '2':
                 printMap(mapsArray, nbMaps);
                 break;
+
             // Update Map
             case '3':
-                updateMap(numMaps);
+                printf("What do you want to do ?\n");
+                printf("\t1. Add a room\n");
+                printf("\t2. Delete a room\n");
+
+                // res = 0;
+
+                updateChoice = getOption();
+
+                // Second switch for the update choice
+                switch (updateChoice)
+                {
+                    case '1':
+                        updateMap(numMaps);
+                        break;
+
+                    case '2':
+                        printMap(mapsArray, nbMaps);
+                        deleteRoom(mapsArray);
+                        //editRoom(numMaps);
+                        
+                    // Default message if user enter a wrong option
+                    default:
+                        printf("Please select a valid option between 1 and 2\n");
+                }
                 break;
+
             // Delete Map
             case '4':
-                printMap(mapsArray, nbMaps);
-                deleteRoom(mapsArray);
+                printf(""RED "What do you really want to erase the entire map ?" RESET"\n");
+
+                printf("\t1. Yes\n");
+                printf("\t2. No\n");
+
+                int deleteChoice = getOption();
+                switch (deleteChoice)
+                {
+                case '1':
+                    deleteMapFromFile();
+                    break;
+
+                case '2':
+                    printf("You have chosen to keep the map\n");
+                    break;
+                
+                default:
+                    printf("Please select a valid option between 1 and 2\n");
+                    break;
+                }
                 break;
             // Play game
             case '5':
-                printf("Coming soon ...\n");
+                printf(""BLUE "Coming soon ..." RESET"\n");
                 break;
+
             // Exit
             case '6':
                 printf("Bye bye\n");
                 exit(0);
                 break;
 
+            // Default message if user enter a wrong option
             default:
                 printf("Please enter a number between 1 and 6\n");
                 break;
@@ -232,7 +292,7 @@ void launchTextTitle()
 {
     // getting content of the file
 
-    FILE* file = fopen("./sources/cli/splash_art.txt", "r");
+    FILE* file = fopen("./ressources/splash_art/splash_art.txt", "r");
 
     char line[MAX_LEN];
 

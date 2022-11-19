@@ -24,9 +24,12 @@ Room* newRoom(char** map, int x, int y, int nbLevel);
 
 // files manipulation functions and test functions
 
+// get the last id of the file
 int getLastId();
 
 void deleteRoomFromFile(int roomID);
+
+void deleteMapFromFile();
 
 void checkFileExtension();
 
