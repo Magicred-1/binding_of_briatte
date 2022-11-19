@@ -28,8 +28,7 @@ void cliStart()
 
 void cliSelector()
 {
-    clear();
-    printf("\t1. Map Editor\n\t2. Monsters Editor\n\t3. Items Editor\n\t4. Exit\n");
+    printf("\t1. Map Editor\n\t2. Items Editor\n\t3. Exit\n");
     int answer = getOption();
 
     switch (answer)
@@ -39,25 +38,26 @@ void cliSelector()
             mapEditor();
             break;
         // Monster
-        case '2':
+        /* case '2':
             monsterEditor();
-            break;
+            break;*/
         // Items
-        case '3':
+        case '2':
             itemEditor();
             break;
         // Exit
-        case '4':
+        case '3':
             printf("Bye bye !\n");
             exit(0);
             break;
         default:
-            printf("Please select a valid option");
+            printf("Please select a valid option between 1 and 3\n");
     }
 }
 
 void mapEditor()
 {   
+    fflush(stdin);
     while (1)
     {
         // We get the latest datas from the array of maps
@@ -127,6 +127,7 @@ void mapEditor()
 
 void itemEditor()
 {
+    fflush(stdin);
     while (1)
     {
         // Display the menu
@@ -175,8 +176,9 @@ void itemEditor()
     
 }
 
-void monsterEditor()
+/* void monsterEditor()
 {
+    fflush(stdin);
     while (1)
     {
         fflush(stdin);
@@ -223,7 +225,7 @@ void monsterEditor()
         }
     }
     
-}
+} */
 
 // Display the ASCII Text Title
 void launchTextTitle()
