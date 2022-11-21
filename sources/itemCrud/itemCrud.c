@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "string.h"
-#include "../more-string/more-string.h"
+#include "../more_string/more-string.h"
 #include "itemCrud.h"
 
 Item *newItem(char *name, double hpMax, double shield, double dmg, int ps, int ss, int flight){
@@ -34,7 +34,6 @@ void printItem(Item item){
     if (item.flight !=0)
         printf("flight = true \n");
 
-    printf("/------------------------------/\n");
 }
 
 void freeItem(Item *item){
@@ -44,7 +43,9 @@ void freeItem(Item *item){
 
 void printAllItems(Item **Items, int size){
     for (int i = 0; i < size; i++){
+        printf("/------------- item number : %d -----------------/\n", i);
         printItem(*Items[i]);
+
     }
 }
 
@@ -282,6 +283,7 @@ void delItem(){
                 while(strcmp(fgets(data, 255, f) ,"---\n") != 0){
                     continue;
                 }
+                //lol
                 continue;
             }
             fputs(data, tmp);

@@ -4,6 +4,7 @@
 #include "../file_mapping/file_mapping.h"
 #include "../cli/cli_commands.h"
 #include "../read_monsters/read_monster.h"
+#include "../itemCrud/itemCrud.h"
 
 #define MAX_LEN 200
 
@@ -218,18 +219,21 @@ void itemEditor()
         printf("\t5. Exit..\n");
 
         int res = getOption();
-
+        int size;
+        Item **Items = getItems("items.itbob", &size);
         fflush(stdin);
         switch (res)
         {
             // Create Item
             case '1':
-                printf("Coming soon ...\n");
+                createItem();
                 break;
 
             // Read Item
             case '2':
-                printf("Coming soon ...\n");
+
+                printAllItems(Items, size);
+                freeAllItems(Items, size);
                 break;
 
             // Delete Item
@@ -312,7 +316,7 @@ void launchTextTitle()
 {
     // getting content of the file
 
-    FILE* file = fopen("./ressources/splash_art/splash_art.txt", "r");
+    FILE* file = fopen("splash_art.txt", "r");
 
     char line[MAX_LEN];
 
