@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "cli_commands.h": "c",
+        "file_mapping.h": "c",
+        "game_run.h": "c"
+    }
+}

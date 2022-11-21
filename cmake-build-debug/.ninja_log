@@ -1,0 +1,15 @@
+# ninja log v5
+1	24	1668160576756180801	CMakeFiles/binding_of_briatte.dir/main.c.o	8c19187d8909ca5e
+0	26	1667497217621063190	CMakeFiles/binding_of_briatte.dir/sources/file_mapping/file_mapping.c.o	6deee34f72e0307d
+24	60	1668160576791881332	binding_of_briatte	30a00deb6557df8a
+0	27	1667497217622234677	CMakeFiles/binding_of_briatte.dir/sources/more-string/more-string.c.o	59090320681e7959
+0	93	1667497217687245546	CMakeFiles/binding_of_briatte.dir/sdlTest/sedlTest.c.o	431042b5b3749fde
+2	174	1668160565578844880	CMakeFiles/binding_of_briatte.dir/sources/itemCrud/itemCrud.c.o	98d4fbc65c32c9d3
+0	69	1669037129939632305	CMakeFiles/binding_of_briatte.dir/sources/file_mapping/file_mapping.c.o	6deee34f72e0307d
+1	69	1669037129939584888	CMakeFiles/binding_of_briatte.dir/main.c.o	8c19187d8909ca5e
+1	69	1669037129939581138	CMakeFiles/binding_of_briatte.dir/sources/more-string/more-string.c.o	59090320681e7959
+1	71	1669037129942628293	CMakeFiles/binding_of_briatte.dir/sources/itemCrud/itemCrud.c.o	98d4fbc65c32c9d3
+1	115	1669037129986422730	CMakeFiles/binding_of_briatte.dir/sdlTest/sedlTest.c.o	431042b5b3749fde
+115	172	1669037130044468184	binding_of_briatte	30a00deb6557df8a
+0	32	1669037160086280365	CMakeFiles/binding_of_briatte.dir/main.c.o	8c19187d8909ca5e
+32	65	1669037160119865325	binding_of_briatte	30a00deb6557df8a
