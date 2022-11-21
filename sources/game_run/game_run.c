@@ -2,43 +2,38 @@
 #include <stdlib.h>
 #include "game_run.h"
 
-typedef enum
+typedef enum 
 {
     UP = 72,
     DOWN = 80,
     LEFT = 75,
     RIGHT = 77,
     SPACE = 32
-} touche;
+} keystroke;
 
 void playerMovement()
 {
-    while (1)
+    keystroke key = 0;
+    key = getchar();
+    switch (key)
     {
-        if (kbhit())
-        {
-            touche key = getch();
-            switch (key)
-            {
-                case UP:
-                    //printf("UP");
-                    break;
-                case DOWN:
-                    //printf("DOWN");
-                    break;
-                case LEFT:
-                    //printf("LEFT");
-                    break;
-                case RIGHT:
-                    //printf("RIGHT");
-                    break;
-                case SPACE:
-                    //printf("SPACE");
-                    break;
-                default:
-                    break;
-            }
-        }
+        case UP:
+            printf("UP");
+            break;
+        case DOWN:
+            printf("DOWN");
+            break;
+        case LEFT:
+            printf("LEFT");
+            break;
+        case RIGHT:
+            printf("RIGHT");
+            break;
+        case SPACE:
+            printf("SPACE");
+            break;
+        default:
+            printf("ERROR");
+            break;
     }
-    
 }

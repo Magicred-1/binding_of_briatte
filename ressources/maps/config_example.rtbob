@@ -1,4 +1,4 @@
-{4}
+{5}
 [9|15]1
 W W W W W W W D W W W W W W W
 W H G                     G W
@@ -42,4 +42,26 @@ W          S R R S          W
 W G G                   G G W
 W   G                   G H W
 W W W W W W W W D W W W W W W
+
+[9|15]5
+W W W W W W W D W W W W W W W
+W H G                     G W
+W G G                   G G W
+W                           W
+D             P             D
+W                           W
+W G G                   G G W
+W   G                   G H W
+W W W W W W W D W W W W W W W
+
+[9|15]5
+W W W W W W W W W W W W W W W
+W H G                     G W
+W G G                   G G W
+W           R   R           W
+W             R             D
+W           R   R           W
+W G G                   G G W
+W   G                   G H W
+W W W W W W W D W W W W W W W
 

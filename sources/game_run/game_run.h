@@ -16,7 +16,7 @@ typedef enum
     LEFT = 75,
     RIGHT = 77,
     SPACE = 32
-} touche;
+} keystroke;
 
 void playerMovement();
 

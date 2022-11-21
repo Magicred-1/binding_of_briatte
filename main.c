@@ -7,10 +7,6 @@
 
 int main(int argc, char const *argv[])
 {
-    // int nbMaps = 0;
-    // // Room** mapsArray = readMap(&nbMaps);
-    // // printMap(mapsArray, nbMaps);
     // launch the CLI
     cliStart();
-    // playerMovement();
 }

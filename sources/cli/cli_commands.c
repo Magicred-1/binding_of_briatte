@@ -20,6 +20,7 @@ void cliStart()
     // Splash Screen is launched
     launchTextTitle();
 
+    fflush(stdin);
     cliSelector();
 
     // Map Editor is launched
@@ -79,7 +80,7 @@ void mapEditor()
         int roomID = 0;
 
         // Display the menu
-        printf("Choose an option between 1 and 6 :\n\n");
+        printf("Choose an option between 1 and 7 :\n\n");
 
         // create a map
         printf("\t1. Create the map..\n");
@@ -96,8 +97,11 @@ void mapEditor()
         // play game
         printf("\t5. Play the game..\n");
 
+        // Going back to main menu
+        printf("\t6. Go back to main menu..\n");
+
         // exit
-        printf("\t6. Exit..\n\n");
+        printf("\t7. Exit..\n\n");
 
         int res = getOption();
 
@@ -170,9 +174,14 @@ void mapEditor()
             case '5':
                 printf(""BLUE "Coming soon ..." RESET"\n");
                 break;
+            
+            // Going back to main menu
+            case '6':
+                cliSelector();
+                break;
 
             // Exit
-            case '6':
+            case '7':
                 printf("Bye bye\n");
                 exit(0);
                 break;
@@ -191,7 +200,7 @@ void itemEditor()
     while (1)
     {
         // Display the menu
-        printf("Choose an option between 1 and 3 :\n\n");
+        printf("Choose an option between 1 and 5 :\n\n");
 
         // create an item
         printf("\t1. Create an item..\n");
@@ -202,8 +211,11 @@ void itemEditor()
         // delete item
         printf("\t3. Delete an item..\n");
 
+        // Back to the main menu
+        printf("\t4. Going back to the main menu\n\n");
+
         // exit
-        printf("\t4. Exit..\n\n");
+        printf("\t5. Exit..\n");
 
         int res = getOption();
 
@@ -214,22 +226,30 @@ void itemEditor()
             case '1':
                 printf("Coming soon ...\n");
                 break;
+
             // Read Item
             case '2':
                 printf("Coming soon ...\n");
                 break;
+
             // Delete Item
             case '3':
                 printf("Coming soon ...\n");
                 break;
-            // Exit
+
             case '4':
+                cliSelector();
+                break;
+            
+            // Exit
+            case '5':
                 printf("Bye bye\n");
                 exit(0);
                 break;
-
+            
+            // Default message if user enter a wrong option
             default:
-                printf("Please enter a number between 1 and 4\n");
+                printf("Please enter a number between 1 and 5\n");
                 break;
         }
     }
