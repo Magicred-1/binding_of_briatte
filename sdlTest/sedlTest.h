@@ -1,0 +1,8 @@
+//
+// Created by Eliott GERMAIN on 10/10/2022.
+//
+
+#ifndef BINDING_OF_BRIATTE_SEDLTEST_H
+#define BINDING_OF_BRIATTE_SEDLTEST_H
+void sdlTest();
+#endif //BINDING_OF_BRIATTE_SEDLTEST_H

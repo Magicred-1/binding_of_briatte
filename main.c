@@ -10,3 +10,4 @@ int main(int argc, char const *argv[])
     // launch the CLI
     cliStart();
 }
+
