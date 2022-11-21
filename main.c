@@ -7,9 +7,9 @@ int main(int argc, char const *argv[])
 {
 
     int size;
-    //Item **Items = getItems("items.itbob",&size);
-    //printAllItems(Items, size);
-    //freeAllItems(Items, size);
+    Item **Items = getItems("items.itbob",&size);
+    printAllItems(Items, size);
+    freeAllItems(Items, size);
     //creatItem();
     //delItem();
     //changeElementNumber("items.itbob",0);
