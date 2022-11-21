@@ -1,18 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "./sources/file_mapping/file_mapping.h"
-#include "sdlTest/sedlTest.h"
-#include "./sources/itemCrud/itemCrud.h"
+#include "./sources/cli/cli_commands.h"
+#include "./sources/file_extension_checker/file_extension_checker.h"
+#include "./sources/game_run/game_run.h"
+
 int main(int argc, char const *argv[])
 {
-
-    int size;
-    Item **Items = getItems("items.itbob",&size);
-    printAllItems(Items, size);
-    freeAllItems(Items, size);
-    //creatItem();
-    //delItem();
-    //changeElementNumber("items.itbob",0);
-    return 0;
+    // launch the CLI
+    cliStart();
 }
 
