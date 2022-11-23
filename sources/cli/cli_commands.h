@@ -14,6 +14,9 @@ void cliStart();
 // selection between map editor / item editor / monster editor
 void cliSelector();
 
+// clear the screen
+void clearScreen();
+
 // CRUD of Map / Monsters / Items
 // Map Editor is launched
 void mapEditor();

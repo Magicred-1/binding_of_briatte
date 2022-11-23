@@ -165,6 +165,20 @@ void freeRoom(Room* room)
     free(room);
 }
 
+void printRoom(Room* room)
+{
+    // printf("nbLevel = %d", room->nbLevel);  
+
+    for (int j = 0; j < room->x; j += 1)
+    {
+        for (int k = 0; k < room->y; k += 1)
+        {
+            printf("%c", room->map[j][k]);
+        }
+        printf("\n");
+    }
+}
+
 void printMap(Room** mapsArray, int nbMaps)
 {
     // print the amount of maps available
@@ -279,7 +293,8 @@ void createMap()
     }
     else
     {
-        printf("The file already exists.\n\nRedirecting to the update function\n\n");
+        fclose(f);
+        printf(""GREEN "The file already exists.\n\nRedirecting to the update function" RESET"\n\n");
         updateMap(getLastId());
     }
 }
@@ -299,6 +314,7 @@ Room** readMap(int* ptrNbMaps)
         int idMaps = 0;
         int size_x = 0;
         int size_y = 0;
+        int indexArrayMaps = 0;
 
         fscanf(f, "{%d}\n", &nbMaps);
         
@@ -306,8 +322,6 @@ Room** readMap(int* ptrNbMaps)
         //printf("nbMaps : %d\n", nbMaps);
 
         Room** Maps_Created = malloc(sizeof(Room)*nbMaps);
-
-        int indexArrayMaps = 0;
 
         ///printf("%d %d %d %d \n", nbMaps, size_y, size_x, idMaps);
 
@@ -380,7 +394,7 @@ void updateMap(int choiceOfRoom)
     }
 
     // we add the new map
-    printf("Enter the size of the map number %d.\n(For example : 7 16 = a map of size 7x16)\n", choiceOfRoom+1);
+    printf("Enter the size of the map number %d.\n(For example : 7 16 = a map of size 7x16)\n", choiceOfRoom + 1);
     scanf("%d %d", &size_x, &size_y);
                 
     /* 
@@ -391,9 +405,7 @@ void updateMap(int choiceOfRoom)
     {
         if (size_x >= 1 && size_x <= 100 && size_y >= 1 && size_y <= 100) 
         {
-        printf("\nThe size of the map is not valid.\nPlease enter a size between 1 and 100.\n");
-        // if the size is not valid we delete the file and exit the program
-        exit(0);
+            printf("\n"RED "The size of the map is not valid.\nPlease enter a size between 1 and 100." RESET"\n");
         }
     }
 
@@ -431,6 +443,7 @@ void updateMap(int choiceOfRoom)
     fprintf(f2, "\n");
     
     // before deleting the files we close them and renaming the new into the old one
+    unlink(temporaryFile);
     fclose(f);
     fclose(f2);
 

@@ -8,5 +8,12 @@
 int main(int argc, char const *argv[])
 {
     // launch the CLI
-    cliStart();
+    int nbMaps = getLastId();
+    // launch the game
+    Room** room = readMap(&nbMaps);
+    printRoom(room[4]);
+    playerMovement(room, nbMaps);
+
+    // playerMovement(arrayMaps, nbMaps);
+    return 0;
 }
