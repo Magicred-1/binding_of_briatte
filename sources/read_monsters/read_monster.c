@@ -20,7 +20,7 @@ void printMonster(Monster monster){
 
 void printMonsterArray(Monster** arrayMonster, int nbOfMonsters){
     for(int i = 0; i < nbOfMonsters; i += 1){
-        printf("name: %s \nhpmax: %.1f \nshoot: %s \nspectral shoot: %s \nflight: %s\n", arrayMonster[i]->name, arrayMonster[i]->hpMax, arrayMonster[i]->shoot, arrayMonster[i]->ss, arrayMonster[i]->flight);
+        printf("name: %s \nhpmax: %.1f \nshoot: %s \nspectral shoot: %s \nflight: %s\n---\n", arrayMonster[i]->name, arrayMonster[i]->hpMax, arrayMonster[i]->shoot, arrayMonster[i]->ss, arrayMonster[i]->flight);
     }
 }
 

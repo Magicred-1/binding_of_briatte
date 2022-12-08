@@ -35,8 +35,10 @@ void cliSelector()
     while (1)
     {
         fflush(stdin);
-        printf("\t1. Map Editor\n\t2. Items Editor\n\t3. Generate etage\n\t4. Exit\n");
+        printf("\t1. Map Editor\n\t2. Print Monsters\n\t3. Items Editor\n\t4. Generate etage\n\t5. Exit\n");
         int answer = getOption();
+        int nbOfMonsters = 0;
+        Monster** arrayMonster = monstersMap("ressources/monsters/monster.mtbob", &nbOfMonsters);
 
         switch (answer)
         {
@@ -45,18 +47,18 @@ void cliSelector()
                 mapEditor();
                 break;
             // Monster
-            /* case '2':
-                monsterEditor();
-                break;*/
-            // Items
             case '2':
+                printMonsterArray(arrayMonster, nbOfMonsters);
+                break;
+            // Items
+            case '3':
                 itemEditor();
                 break;
-            case '3':
+            case '4':
                 CreateEtage();
                 break;
             // Exit
-            case '4':
+            case '5':
                 printf("Bye bye !\n");
                 exit(0);
                 break;
