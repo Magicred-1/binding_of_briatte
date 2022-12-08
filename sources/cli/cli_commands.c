@@ -35,7 +35,7 @@ void cliSelector()
     while (1)
     {
         fflush(stdin);
-        printf("\t1. Map Editor\n\t2. Items Editor\n\t3. Generate etage\n\t4. Exit");
+        printf("\t1. Map Editor\n\t2. Items Editor\n\t3. Generate etage\n\t4. Exit\n");
         int answer = getOption();
 
         switch (answer)
@@ -320,7 +320,7 @@ void launchTextTitle()
 {
     // getting content of the file
 
-    FILE* file = fopen("splash_art.txt", "r");
+    FILE* file = fopen("./ressources/splash_art/splash_art.txt", "r");
 
     char line[MAX_LEN];
 
