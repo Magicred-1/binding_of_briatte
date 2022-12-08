@@ -21,3 +21,5 @@ __________ __________ .___    _____ _________________________________
       Created by : Djason G., Eliott G., Alexis D. circa 2022
 
                     Binding Of Isaac (Clone)
+
+Link to the French Manual : [Google Drive](https://docs.google.com/presentation/d/1Idy3mF-PjSgYEI82taVEiNOjQeev5IOvpDFRns026GU/edit?usp=sharing)
