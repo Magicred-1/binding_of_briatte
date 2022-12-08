@@ -228,7 +228,7 @@ void createItem(){
     FILE *file = fopen("items.itbob","a+");
     if (file != NULL)
     {
-        //fprintf(file, "zouuu");
+        //fprintf(file, "---");
         fprintf(file,"name=%s", name);
         if(hpMax != 0)
             fprintf(file,"\nhpMax=%lf", hpMax);
