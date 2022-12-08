@@ -224,7 +224,7 @@ void itemEditor()
 
         int res = getOption();
         int size;
-        Item **Items = getItems("items.itbob", &size);
+        Item **Items = getItems("ressources/items/items.itbob", &size);
         fflush(stdin);
         switch (res)
         {

@@ -184,7 +184,7 @@ void changeElementNumber(char *fileName, int i){
     if (i == 1)
         nb +=1;
 
-    FILE *f = fopen("items.itbob", "r");
+    FILE *f = fopen("ressources/items/items.itbob", "r");
     FILE *tmp = fopen("tmp.itbob", "w+");
     if (f != NULL)
     {
@@ -194,12 +194,12 @@ void changeElementNumber(char *fileName, int i){
             fputs(data, tmp);
         }
     } else
-        printf("Cant open items.itbob");
+        printf("Cant open ressources/items/items.itbob");
 
     fclose(tmp);
     fclose(f);
-    remove("items.itbob");
-    rename("tmp.itbob", "items.itbob");
+    remove("ressources/items/items.itbob");
+    rename("tmp.itbob", "ressources/items/items.itbob");
 }
 
 void createItem(){
@@ -210,7 +210,7 @@ void createItem(){
     char ss[30];
     char ps[30];
     char flight[30];
-    formatFile("items.itbob");
+    formatFile("ressources/items/items.itbob");
     printf("Enter the name of the item you want to creat : \n");
     scanf("%[^\n]s",name);
     printf("Enter the value of hpMax (double) : \n");
@@ -225,7 +225,7 @@ void createItem(){
     scanf("%s",ps);
     printf("Set flight to \"true\" or \"false\" : \n");
     scanf("%s",flight);
-    FILE *file = fopen("items.itbob","a+");
+    FILE *file = fopen("ressources/items/items.itbob","a+");
     if (file != NULL)
     {
         //fprintf(file, "---");
@@ -243,11 +243,11 @@ void createItem(){
         if (strcmp(flight, "true") == 0)
             fprintf(file,"\nflight=true");
         fclose(file);
-        changeElementNumber("items.itbob", 1);
+        changeElementNumber("ressources/items/items.itbob", 1);
     }
     else
     {
-        printf("Impossible to open items.itbob file");
+        printf("Impossible to open ressources/items/items.itbob file");
     }
 
 }
@@ -259,7 +259,7 @@ void freeAllItems(Item **Items, int size) {
 }
 
 void delItem(){
-    //formatFile("items.itbob");
+    //formatFile("ressources/items/items.itbob");
     char item[55];
     printf("Enter the exact name of the item you want to delete : \n");
     scanf("%[^\n]s", item);
@@ -269,7 +269,7 @@ void delItem(){
     strcat(str1, item);
     strcat(str1,"\n");
     //printf("str1 :%s\n", str1);
-    FILE *f = fopen("items.itbob", "r");
+    FILE *f = fopen("ressources/items/items.itbob", "r");
     FILE *tmp = fopen("tmp.itbob", "w+");
     if (f != NULL)
     {
@@ -288,14 +288,14 @@ void delItem(){
         }
         fclose(f);
         fclose(tmp);
-        remove("items.itbob");
-        rename("tmp.itbob", "items.itbob");
+        remove("ressources/items/items.itbob");
+        rename("tmp.itbob", "ressources/items/items.itbob");
     }
     else
     {
-        printf("Impossible to open items.itbob file");
+        printf("Impossible to open ressources/items/items.itbob file");
     }
-    changeElementNumber("items.itbob", 0);
+    changeElementNumber("ressources/items/items.itbob", 0);
 }
 
 void formatFile(char* fileName){
@@ -312,7 +312,7 @@ void formatFile(char* fileName){
     }
     else
     {
-        printf("Impossible to open items.itbob file");
+        printf("Impossible to open ressources/items/items.itbob file");
     }
 
 }
