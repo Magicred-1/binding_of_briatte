@@ -1,4 +1,5 @@
-{23}
+{24}
+
 
 
 
@@ -74,6 +75,11 @@ ss=true
 flight=true
 ---
 name=lal
+hpMax=2.000000
+shield=2.000000
+dmg=2.000000
+---
+name=ll
 hpMax=2.000000
 shield=2.000000
 dmg=2.000000
