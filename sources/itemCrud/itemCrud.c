@@ -74,7 +74,6 @@ Item** getItems( char *fileName, int *itemsSize) {
             if(c=='\n')
                 nLines++;
         }
-        printf(" nb lines : %d\n ", nLines);
         rewind(f);
         fscanf(f, "{%d}", itemsSize);
         //printf("item size : %d\n", *itemsSize);
@@ -163,7 +162,7 @@ Item** getItems( char *fileName, int *itemsSize) {
             }
         }
 
-        printf("\nindex  : %d\n", index);
+        //printf("\nindex  : %d\n", index);
         fclose(f);
         return array;
 
@@ -214,7 +213,6 @@ void createItem(){
     formatFile("items.itbob");
     printf("Enter the name of the item you want to creat : \n");
     scanf("%[^\n]s",name);
-    printf("hello");
     printf("Enter the value of hpMax (double) : \n");
     scanf("%lf", &hpMax);
     printf("Enter the value of shield (double) : \n");
@@ -227,10 +225,10 @@ void createItem(){
     scanf("%s",ps);
     printf("Set flight to \"true\" or \"false\" : \n");
     scanf("%s",flight);
-    printf("name = %s, hpMax = %lf , shield = %lf, dmg = %lf, ps = %s, ss = %s, flight = %s\n",name, hpMax, shield, dmg, ps, ss, flight);
     FILE *file = fopen("items.itbob","a+");
     if (file != NULL)
     {
+        //fprintf(file, "zouuu");
         fprintf(file,"name=%s", name);
         if(hpMax != 0)
             fprintf(file,"\nhpMax=%lf", hpMax);
@@ -244,7 +242,7 @@ void createItem(){
             fprintf(file,"\nss=true");
         if (strcmp(flight, "true") == 0)
             fprintf(file,"\nflight=true");
-        
+        fclose(file);
         changeElementNumber("items.itbob", 1);
     }
     else
@@ -261,16 +259,16 @@ void freeAllItems(Item **Items, int size) {
 }
 
 void delItem(){
-    formatFile("items.itbob");
+    //formatFile("items.itbob");
     char item[55];
     printf("Enter the exact name of the item you want to delete : \n");
     scanf("%[^\n]s", item);
-    printf("item name = %s\n", item);
+    //printf("item name = %s\n", item);
     char data[255];
     char str1[255]="name=";
     strcat(str1, item);
     strcat(str1,"\n");
-    printf("str1 :%s\n", str1);
+    //printf("str1 :%s\n", str1);
     FILE *f = fopen("items.itbob", "r");
     FILE *tmp = fopen("tmp.itbob", "w+");
     if (f != NULL)
@@ -283,7 +281,6 @@ void delItem(){
                 while(strcmp(fgets(data, 255, f) ,"---\n") != 0){
                     continue;
                 }
-                //lol
                 continue;
             }
             fputs(data, tmp);
@@ -312,7 +309,6 @@ void formatFile(char* fileName){
         }
         rewind(file);
         fclose(file);
-
     }
     else
     {

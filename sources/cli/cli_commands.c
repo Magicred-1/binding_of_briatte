@@ -238,7 +238,7 @@ void itemEditor()
 
             // Delete Item
             case '3':
-                printf("Coming soon ...\n");
+                delItem();
                 break;
 
             case '4':
