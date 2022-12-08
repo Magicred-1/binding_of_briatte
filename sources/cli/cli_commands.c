@@ -5,6 +5,7 @@
 #include "../cli/cli_commands.h"
 #include "../read_monsters/read_monster.h"
 #include "../itemCrud/itemCrud.h"
+#include "../generate_etage/generate_etage.h"
 
 #define MAX_LEN 200
 
@@ -34,7 +35,7 @@ void cliSelector()
     while (1)
     {
         fflush(stdin);
-        printf("\t1. Map Editor\n\t2. Items Editor\n\t3. Exit\n");
+        printf("\t1. Map Editor\n\t2. Items Editor\n\t3. Generate etage\n\t4. Exit");
         int answer = getOption();
 
         switch (answer)
@@ -51,8 +52,11 @@ void cliSelector()
             case '2':
                 itemEditor();
                 break;
-            // Exit
             case '3':
+                CreateEtage();
+                break;
+            // Exit
+            case '4':
                 printf("Bye bye !\n");
                 exit(0);
                 break;
